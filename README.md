@@ -56,15 +56,15 @@ USD free API for the inherent of the food to select and calculate carbohydrate o
 A doctor will see a list of patients that are theirs
  
 Blood Glucose Level
-	• Before and after each meal
-	• By default, the Glucose level is higher after a meal
-	• So if a record is not recorded with a before or after meal identification it will be useless
+	* Before and after each meal
+	* By default, the Glucose level is higher after a meal
+	* So if a record is not recorded with a before or after meal identification it will be useless
 Dropdown menu for the selection of the meal for the patient
-	• The date and time are automatic]
-	• But the option to change it should be changeable by the patient
+	* The date and time are automatic]
+	* But the option to change it should be changeable by the patient
 A doctor should be able to see the 
-	• The doctor will set up a threshold for the patient's levels
-	• The range from 80 to 150
+	* The doctor will set up a threshold for the patient's levels
+	* The range from 80 to 150
 		○ If the levels are 
 		○ Split it from the patina
 
