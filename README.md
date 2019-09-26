@@ -80,3 +80,43 @@ Exercise Data
 		○ Notification before and after each meal
 
 Possible use of a smartwatch to monitor patient reactions to different foods against the patient's ecosystem
+
+
+# Extended notes for Sprint 2
+
+## Main Menus for patients:
+1. Exercise
+2. Nutrition / meal entering / gets carbohydrates
+3. Blood Glucose
+4. View your data
+    1. Then give three options to see those
+### Also: show settings
+- Name
+- Address
+- Email address
+- Phone number
+- allow to set proper unit of data
+
+
+## Main Menus for doctors:
+Doctor login 
+
+1. Patients list
+    1. Doctors can’t see any patients unless admin has added patient
+    2. Click user
+        1. Dr kawsar: 3 tabs
+            1. Click one tab
+            2. See a patients chart
+                1. Direct comparison against another patient
+		
+### Also: show settings
+- Name
+- Address
+- Email address
+- Phone number
+- Glucose level: allow to set unit they want to see data
+
+
+### Admin can change who a patient’s doctor is
+    - Potentially, doctor and patient could transfer
+    - Verification process - a flag, only admin can accept them
