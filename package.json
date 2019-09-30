@@ -8,8 +8,10 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "react": "16.8.6",
-    "react-native": "0.60.5"
+    "react": "^16.8.6",
+    "react-dom": "^16.10.1",
+    "react-native": "0.60.5",
+    "react-scripts": "^3.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
