@@ -24,6 +24,23 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { createStackNavigator, createAppContainer } from 'react-navigation';
+import Home from './src/screens/Home';
+
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: Home
+  }
+});
+
+const AppContainer = createAppContainer(AppNavigator);
+
+export default class App extends Component {
+  render() {
+    return <AppContainer />;
+  }
+}
+
 const App = () => {
   return (
     <Fragment>
