@@ -27,11 +27,17 @@ import {
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from './src/screens/Home';
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: Home
+
+const AppNavigator = createStackNavigator(
+  {
+    Home,
+    AddItem,
+    List
+  },
+  {
+    initialRouteName: 'Home'
   }
-});
+);
 
 const AppContainer = createAppContainer(AppNavigator);
 
