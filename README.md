@@ -1,4 +1,10 @@
 #Project Name: Glucose Tracker
+###How to run this app?
+* Build and run on IOS: react-native run-ios
+* Build and run on Android: react-native run-android
+
+Potentially might want to use https://expo.io/learn / https://snack.expo.io/ to see changes more instantaneously.
+
 #Project Owner: Kawsar Project
 #Description:  
 Patients submit their food intake, blood glucose level and exercise information from their phone applications and doctors can view those information graphically from a phone application or web app
@@ -54,7 +60,7 @@ The daily values and monthly carbohydrates should be shown in a graphical way
 USD free API for the inherent of the food to select and calculate carbohydrate of the food selected
 
 A doctor will see a list of patients that are theirs
- 
+
 Blood Glucose Level
 	* Before and after each meal
 	* By default, the Glucose level is higher after a meal
@@ -62,19 +68,19 @@ Blood Glucose Level
 Dropdown menu for the selection of the meal for the patient
 	* The date and time are automatic]
 	* But the option to change it should be changeable by the patient
-A doctor should be able to see the 
+A doctor should be able to see the
 	* The doctor will set up a threshold for the patient's levels
 	* The range from 80 to 150
-		○ If the levels are 
+		○ If the levels are
 		○ Split it from the patina
 
 Exercise Data
-	• Step collection 
+	• Step collection
 		○ Apple watch
 			§ Health app apple?
 	• Automatically collect the active data.
 		○ If not manually enter the exercise data
-	• Four Activities 
+	• Four Activities
 	• History of activities contrasted against the food eaten
 	• Reminders for Entering the Glucose Data
 		○ Notification before and after each meal
@@ -99,7 +105,7 @@ Possible use of a smartwatch to monitor patient reactions to different foods aga
 
 
 ## Main Menus for doctors:
-Doctor login 
+Doctor login
 
 1. Patients list
     1. Doctors can’t see any patients unless admin has added patient
@@ -108,7 +114,7 @@ Doctor login
             1. Click one tab
             2. See a patients chart
                 1. Direct comparison against another patient
-		
+
 ### Also: show settings
 - Name
 - Address
