@@ -1,5 +1,7 @@
+// Documentation: https://firebase.google.com/docs/web/setup
+
 import Firebase from 'firebase';
-let initFirebase = Firebase.initializeApp(
+let firebase = Firebase.initializeApp(
    {
     apiKey: "AIzaSyBEU8YtYO5uKQwiWCuBT0MHl0u4CxtAAQA",
     authDomain: "cb-glucose-tracer.firebaseapp.com",
@@ -11,5 +13,5 @@ let initFirebase = Firebase.initializeApp(
     measurementId: "G-N4GPY1VGWK"
   }
 );
-let db = initFirebase.database();
-export { db };
+// let db = firebase.database();
+export { firebase };

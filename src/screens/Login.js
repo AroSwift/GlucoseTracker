@@ -8,16 +8,29 @@ import {
 import { styles } from '../stylesheets/Main.js';
 
 //import db from 'firebase';
-import { db } from '../config';
+import { firebase } from '../config';
 
 // TODO: once logged in, redirect to nutrition page
+
+
+//
+// firebase.auth().signInWithCustomToken(token).catch(function(error) {
+//   // Handle Errors here.
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   // ...
+// });
+//
+//
+
 
 export default class Login extends Component {
   state = { email: '', password: '', errorMessage: null }
 
   handleLogin() {
-    console.log(db);
+    console.log(firebase.storage()); // also can do .firestore()
   }
+
 
   render() {
     return (
