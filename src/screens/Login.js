@@ -7,13 +7,17 @@ import {
 // Get all the stylesheets
 import { styles } from '../stylesheets/Main.js';
 
+//import db from 'firebase';
+import { db } from '../config';
+
 // TODO: once logged in, redirect to nutrition page
 
 export default class Login extends Component {
-  state = {
-    email: '',
-    password: ''
-  };
+  state = { email: '', password: '', errorMessage: null }
+
+  handleLogin() {
+    console.log(db);
+  }
 
   render() {
     return (
@@ -31,10 +35,15 @@ export default class Login extends Component {
           onChangeText={password => this.setState({ password })}
           style={styles.breakAfter}
         />
-        <Button mode="contained" onPress={() => console.log('Pressed')}>
+        <Button mode="contained" onPress={this.handleLogin}>
           Login
         </Button>
       </Surface>
     );
   }
 }
+
+// <Button
+//   title="Don't have an account? Sign Up"
+//   onPress={() => this.props.navigation.navigate('SignUp')}
+// />
