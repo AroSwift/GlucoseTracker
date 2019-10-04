@@ -1,12 +1,13 @@
-#Project Name: Glucose Tracker
-###How to run this app?
-* Build and run on IOS: react-native run-ios
-* Build and run on Android: react-native run-android
+# Project Name: Glucose Tracker
+### How to run this app?
+- Build and run on IOS: react-native run-ios
+- Build and run on Android: react-native run-android
 
-Potentially might want to use https://expo.io/learn / https://snack.expo.io/ to see changes more instantaneously.
+### What library is utilized for the beautiful view?
+https://reactnativepaper.com
 
-#Project Owner: Kawsar Project
-#Description:  
+# Project Owner: Kawsar Project
+# Description:  
 Patients submit their food intake, blood glucose level and exercise information from their phone applications and doctors can view those information graphically from a phone application or web app
 
 
