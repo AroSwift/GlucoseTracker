@@ -74,8 +74,3 @@ export default class Login extends Component {
     );
   }
 }
-
-// <Button
-//   title="Don't have an account? Sign Up"
-//   onPress={() => this.props.navigation.navigate('SignUp')}
-// />
