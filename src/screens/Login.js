@@ -28,14 +28,22 @@ export default class Login extends Component {
   state = { email: '', password: '', errorMessage: null }
 
   handleLogin() {
-    console.log(firebase.storage()); // also can do .firestore()
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          // ...
+});
+
+//    console.log(firebase.storage()); // also can do .firestore()
   }
+
 
 
   render() {
     return (
       <Surface style={styles.loginContainer}>
-        <Text style={styles.loginHeader}>Sign In</Text>
+        <Text style={styles.loginHeader}>Log In</Text>
         <TextInput
           label='Email'
           value={this.state.email}
@@ -48,9 +56,20 @@ export default class Login extends Component {
           onChangeText={password => this.setState({ password })}
           style={styles.breakAfter}
         />
-        <Button mode="contained" onPress={this.handleLogin}>
-          Login
-        </Button>
+        <Button
+          title="Login"
+           mode="contained"
+           onPress={this.handleLogin}
+        />
+        <Button mode="contained"
+           onPress={() => this.props.navigation.navigate('SignUp')}>
+              Need an account? Sign Up.
+           </Button>
+
+           <Button title="Go to Home screen"
+    onPress={() => this.props.navigation.navigate('SignUp')}
+   />
+
       </Surface>
     );
   }
