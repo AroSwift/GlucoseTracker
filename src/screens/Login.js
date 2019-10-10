@@ -25,18 +25,39 @@ import { firebase } from '../config';
 
 
 export default class Login extends Component {
-  state = { email: '', password: '', errorMessage: null }
 
-  handleLogin() {
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          // ...
-});
+  constructor(props) {
+    super(props);
+    this.state = {
+          email: '',
+          password: '',
+          errorMessage: null
+    };
+
+
+  }
+
+
+  async handleLogin(email, password) {
+
+      try {
+          await firebase.auth()
+              .signInWithEmailAndPassword(email, password);
+
+          console.log("Logged In!");
+
+          // Navigate to the Home page
+          navigate('Nutrition');
+
+      } catch (error) {
+          console.log(error.toString())
+      }
+
+  }
+
 
 //    console.log(firebase.storage()); // also can do .firestore()
-  }
+
 
 
 

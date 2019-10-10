@@ -4,13 +4,34 @@ import MainTemplate from 'templates/MainTemplate.js';
 
 
 export default class SignUp extends React.Component {
-  state = { email: '', password: '', errorMessage: null }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+          email: '',
+          password: '',
+          errorMessage: null
+    };
 
 
-handleSignUp = () => {
-  // TODO: Firebase stuff...
-  console.log('handleSignUp')
-}
+  }
+
+
+  async handleSignUp(email, pass) {
+
+      try {
+          await firebase.auth()
+              .createUserWithEmailAndPassword(email, pass);
+
+          console.log("Account created");
+
+          // Navigate to the Home page, the user is auto logged in
+
+      } catch (error) {
+          console.log(error.toString())
+      }
+
+  }
 
 
 
