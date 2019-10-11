@@ -28,7 +28,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 22,
     fontWeight: 'bold',
-  }
+  },
+
+  // Signup specific
+  signupContainer: {
+    padding: 20,
+    position: 'absolute',
+    top: '32%',
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(52, 52, 52, 0)' // Make transparent
+  },
+
+  signupHeader: {
+    textAlign: 'center',
+    marginBottom: 10,
+    fontSize: 22,
+    fontWeight: 'bold',
+  },
 
 })
 

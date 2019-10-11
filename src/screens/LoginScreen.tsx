@@ -18,9 +18,6 @@ import { firebase } from '../config';
 //   var errorMessage = error.message;
 //   // ...
 // });
-//
-//
-
 
 export default class LoginScreen extends Component {
 
@@ -31,10 +28,7 @@ export default class LoginScreen extends Component {
           password: '',
           errorMessage: null
     };
-
-
   }
-
 
   async handleLogin(email, password) {
 
@@ -50,14 +44,9 @@ export default class LoginScreen extends Component {
       } catch (error) {
           console.log(error.toString())
       }
-
   }
 
-
 //    console.log(firebase.storage()); // also can do .firestore()
-
-
-
 
   render() {
     return (
@@ -86,13 +75,9 @@ export default class LoginScreen extends Component {
           <Button mode="contained"
              onPress={() => this.props.navigation.navigate('SignUp')}>
                 Need an account? Sign Up.
-             </Button>
+          </Button>
         </Surface>
       </PaperProvider>
     );
   }
 }
-
-// <Button title="Go to Home screen"
-// onPress={() => this.props.navigation.navigate('SignUp')}
-// />

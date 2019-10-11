@@ -5,8 +5,7 @@ import {
   Button, TextInput, Text, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
 // Get all the stylesheets
-//import { styles } from '../stylesheets/Main';
-
+import { styles } from '../stylesheets/Main';
 //import db from 'firebase';
 import { firebase } from '../config';
 
@@ -46,8 +45,8 @@ export default class SignUpScreen extends React.Component {
 render() {
     return (
       <PaperProvider>
-        <Surface style={styles.container}>
-          <Text>Sign Up</Text>
+        <Surface style={styles.signupContainer}>
+          <Text style={styles.loginHeader}>Sign Up</Text>
           {this.state.errorMessage &&
             <Text style={{ color: 'red' }}>
               {this.state.errorMessage}
@@ -55,39 +54,27 @@ render() {
           <TextInput
             placeholder="Email"
             autoCapitalize="none"
-            style={styles.textInput}
             onChangeText={email => this.setState({ email })}
             value={this.state.email}
+            style={styles.breakAfter}
           />
           <TextInput
             secureTextEntry
             placeholder="Password"
             autoCapitalize="none"
-            style={styles.textInput}
             onChangeText={password => this.setState({ password })}
             value={this.state.password}
+            style={styles.breakAfter}
           />
-          <Button title="Sign Up" onPress={this.handleSignUp} />
           <Button
-            title="Already have an account? Login"
-            onPress={() => this.props.navigation.navigate('Login')}
-          />
+            title="Login"
+            mode="contained"
+            onPress={this.handleSignUp}
+            style={styles.breakAfter}>
+            Sign Up
+          </Button>
         </Surface>
       </PaperProvider>
     )
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
-  }
-})

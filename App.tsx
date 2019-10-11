@@ -16,28 +16,6 @@ const MainNavigator = createStackNavigator({
   // Nutrition: {screen: Nutrition},
 });
 
-
-// Open up the starting page: Login
-
-
-// import Login from './src/screens/Login';
-// import SignUp from './src/screens/SignUp';
-// import Nutrition from './src/screens/Nutrition';
-
-
-// class App extends Component {
-//   render() {
-//     return (
-//       <PaperProvider>
-//         <Login/>
-//       </PaperProvider>
-//     )
-//   }
-// }
-//
-// export default App;
-
-
 const App = createAppContainer(MainNavigator);
 
 export default App;
