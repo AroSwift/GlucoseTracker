@@ -6,11 +6,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
-  bottom: {
+  bottomNav: {
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
+    display: 'flex',
+    justifyContent: 'flex-start',
   },
 
   // Main error message

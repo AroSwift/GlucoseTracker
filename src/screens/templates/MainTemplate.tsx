@@ -20,7 +20,7 @@ export default class MainTemplate extends Component {
           />
         </Appbar.Header>
 
-        <Appbar style={styles.bottom}>
+        <Appbar style={styles.bottomNav}>
           <Appbar.Action icon="archive" onPress={() => console.log('Pressed archive')} />
           <Appbar.Action icon="mail" onPress={() => console.log('Pressed mail')} />
           <Appbar.Action icon="label" onPress={() => console.log('Pressed label')} />

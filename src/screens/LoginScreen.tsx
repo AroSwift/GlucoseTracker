@@ -1,6 +1,6 @@
 // Get all the necessary components from React
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, AsyncStorage } from 'react-native';
 import {
   Button, TextInput, Text, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
@@ -29,15 +29,38 @@ export default class LoginScreen extends Component {
           error: false,
           errorMessage: null
     };
+    this.handlePreviousLogin();
   }
 
+  // Previously logged in
+  async handlePreviousLogin() {
+    try {
+      var email = await AsyncStorage.getItem('@GlucoseTracker:email');
+      var password = await AsyncStorage.getItem('@GlucoseTracker:password');
+
+      console.log(email);
+
+      await firebase.auth()
+          .signInWithEmailAndPassword(email, password);
+
+      console.log("Already logged in");
+
+      // Navigate to the Home page
+      return this.props.navigation.replace('Nutrition');
+    } catch(error) {
+      console.log("Not already logged in");
+    }
+  }
+
+  // Trying to log in
   async handleLogin() {
 
       try {
           await firebase.auth()
               .signInWithEmailAndPassword(this.state.email, this.state.password);
-              // Also add: .then(data => this.signInFacebookLoginInFirebase(data.accessToken)
-              // THEN, pass the token to menu
+
+          await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
+          await AsyncStorage.setItem('@GlucoseTracker:password', this.state.password);
 
           console.log("Logged In!");
 
