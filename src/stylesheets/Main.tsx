@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   loginContainer: {
     padding: 20,
     position: 'absolute',
-    top: '32%',
+    top: '25%',
     left: 0,
     right: 0,
     backgroundColor: 'rgba(52, 52, 52, 0)' // Make transparent

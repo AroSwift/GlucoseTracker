@@ -8,12 +8,12 @@ import {createStackNavigator} from 'react-navigation-stack';
 
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
-import Nutrition from './src/screens/NutritionScreen';
+import NutritionScreen from './src/screens/NutritionScreen';
 
 const MainNavigator = createStackNavigator({
   Login: {screen: LoginScreen},
   SignUp: {screen: SignUpScreen},
-  // Nutrition: {screen: Nutrition},
+  Nutrition: {screen: NutritionScreen},
 });
 
 const App = createAppContainer(MainNavigator);

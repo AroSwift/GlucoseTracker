@@ -30,16 +30,17 @@ export default class LoginScreen extends Component {
     };
   }
 
-  async handleLogin(email, password) {
+  async handleLogin() {
 
       try {
           await firebase.auth()
-              .signInWithEmailAndPassword(email, password);
+              .signInWithEmailAndPassword(this.state.email, this.state.password);
 
           console.log("Logged In!");
 
           // Navigate to the Home page
-          navigate('NutritionScreen');
+          return this.props.navigation.replace('Nutrition');
+          // navigate('SignUpScreen');
 
       } catch (error) {
           console.log(error.toString())
@@ -55,12 +56,14 @@ export default class LoginScreen extends Component {
           <Text style={styles.loginHeader}>Log In</Text>
           <TextInput
             label='Email'
+            autoCapitalize="none"
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
             style={styles.breakAfter}
           />
           <TextInput
             label='Password'
+            autoCapitalize="none"
             value={this.state.password}
             onChangeText={password => this.setState({ password })}
             style={styles.breakAfter}
@@ -68,7 +71,7 @@ export default class LoginScreen extends Component {
           <Button
             title="Login"
              mode="contained"
-             onPress={this.handleLogin}
+             onPress={() => this.handleLogin()}
              style={styles.breakAfter}>
              Login
           </Button>

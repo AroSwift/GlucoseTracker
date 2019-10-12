@@ -2,8 +2,12 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import {
-  Appbar, Provider as PaperProvider, Text
+  Button, TextInput, Text, Appbar, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
+// Get all the stylesheets
+import { styles } from '../../stylesheets/Main';
+//import db from 'firebase';
+import { firebase } from '../../config';
 
 export default class MainTemplate extends Component {
   render() {
@@ -15,8 +19,6 @@ export default class MainTemplate extends Component {
             subtitle="Home"
           />
         </Appbar.Header>
-
-        // Content goes here
 
         <Appbar style={styles.bottom}>
           <Appbar.Action icon="archive" onPress={() => console.log('Pressed archive')} />
