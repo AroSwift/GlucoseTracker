@@ -13,6 +13,13 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 
+  // Main error message
+  mainError: {
+    color: 'darkred',
+    textAlign: 'center',
+    paddingBottom: 15,
+  },
+
   // Login specific
   loginContainer: {
     padding: 20,

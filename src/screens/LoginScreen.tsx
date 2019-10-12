@@ -26,6 +26,7 @@ export default class LoginScreen extends Component {
     this.state = {
           email: '',
           password: '',
+          error: false,
           errorMessage: null
     };
   }
@@ -35,15 +36,21 @@ export default class LoginScreen extends Component {
       try {
           await firebase.auth()
               .signInWithEmailAndPassword(this.state.email, this.state.password);
+              // Also add: .then(data => this.signInFacebookLoginInFirebase(data.accessToken)
+              // THEN, pass the token to menu
 
           console.log("Logged In!");
 
           // Navigate to the Home page
           return this.props.navigation.replace('Nutrition');
-          // navigate('SignUpScreen');
-
       } catch (error) {
-          console.log(error.toString())
+          console.log(error);
+
+          // Set error message
+          return this.setState({
+            error: true,
+            errorMessage: error.toString()
+          });
       }
   }
 
@@ -54,12 +61,16 @@ export default class LoginScreen extends Component {
       <PaperProvider>
         <Surface style={styles.loginContainer}>
           <Text style={styles.loginHeader}>Log In</Text>
+          { this.state.errorMessage != null &&
+            <Text style={styles.mainError}>{this.state.errorMessage}</Text>
+          }
           <TextInput
             label='Email'
             autoCapitalize="none"
             value={this.state.email}
             onChangeText={email => this.setState({ email })}
             style={styles.breakAfter}
+            error={this.state.error}
           />
           <TextInput
             label='Password'
@@ -67,6 +78,7 @@ export default class LoginScreen extends Component {
             value={this.state.password}
             onChangeText={password => this.setState({ password })}
             style={styles.breakAfter}
+            error={this.state.error}
           />
           <Button
             title="Login"

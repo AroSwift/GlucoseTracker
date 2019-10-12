@@ -16,6 +16,10 @@ const MainNavigator = createStackNavigator({
   Nutrition: {screen: NutritionScreen},
 });
 
+// Tired of seeing those pesky warnings in the
+// emulator? This disables them. Remove if needed
+console.disableYellowBox = true;
+
 const App = createAppContainer(MainNavigator);
 
 export default App;
