@@ -10,10 +10,10 @@ import { styles } from '../stylesheets/Main';
 import { firebase } from '../config';
 
 
-export default class NutritionScreen extends Component {
+export default class ViewDataScreen extends Component {
   render() {
     return (
-      <Text>NutritionScreen</Text>
+      <Text>ViewDataScreen</Text>
     );
   }
 }

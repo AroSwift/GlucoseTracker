@@ -46,7 +46,7 @@ export default class LoginScreen extends Component {
       console.log("Already logged in");
 
       // Navigate to the Home page
-      return this.props.navigation.replace('Nutrition');
+      return this.props.navigation.replace('MainTemplate');
     } catch(error) {
       console.log("Not already logged in");
     }
