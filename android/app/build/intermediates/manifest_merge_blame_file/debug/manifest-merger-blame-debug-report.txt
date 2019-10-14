@@ -1,0 +1,80 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.glucosetracker"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="28" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\debug\AndroidManifest.xml:5:5-77
+11-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\debug\AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:4:5-67
+12-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:4:22-64
+13    <uses-permission android:name="android.permission.WAKE_LOCK" />
+13-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-68
+13-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:22-65
+14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+14-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:5-79
+14-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:22-76
+15
+16    <application
+16-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:6:5-24:19
+17        android:name="com.glucosetracker.MainApplication"
+17-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:7:7-38
+18        android:allowBackup="false"
+18-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:11:7-34
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.0.1] C:\Users\dbeve\.gradle\caches\transforms-2\files-2.1\72b2b92ec4ab73ff21fb9bc348de3b22\core-1.0.1\AndroidManifest.xml:22:18-86
+20        android:debuggable="true"
+21        android:icon="@mipmap/ic_launcher"
+21-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:9:7-41
+22        android:label="@string/app_name"
+22-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:8:7-39
+23        android:roundIcon="@mipmap/ic_launcher_round"
+23-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:10:7-52
+24        android:theme="@style/AppTheme"
+24-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:12:7-38
+25        android:usesCleartextTraffic="true" >
+25-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\debug\AndroidManifest.xml:7:18-53
+26        <activity
+26-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:13:7-22:18
+27            android:name="com.glucosetracker.MainActivity"
+27-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:14:9-37
+28            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+28-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:16:9-79
+29            android:label="@string/app_name"
+29-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:15:9-41
+30            android:windowSoftInputMode="adjustResize" >
+30-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:17:9-51
+31            <intent-filter>
+31-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:18:9-21:25
+32                <action android:name="android.intent.action.MAIN" />
+32-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:19:13-65
+32-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:19:21-62
+33
+34                <category android:name="android.intent.category.LAUNCHER" />
+34-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:20:13-73
+34-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:20:23-70
+35            </intent-filter>
+36        </activity>
+37        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+37-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:23:7-84
+37-->C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\android\app\src\main\AndroidManifest.xml:23:17-81
+38
+39        <service android:name="com.google.firebase.components.ComponentDiscoveryService" >
+39-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:9-20:19
+39-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:18-89
+40            <meta-data
+40-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:13-19:85
+41                android:name="com.google.firebase.components:io.invertase.firebase.ReactNativeFirebaseAppRegistrar"
+41-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-116
+42                android:value="com.google.firebase.components.ComponentRegistrar" />
+42-->[:react-native-firebase] C:\Users\dbeve\Documents\GitKraken\GlucoseTracker\node_modules\react-native-firebase\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:19:17-82
+43        </service>
+44    </application>
+45
+46</manifest>

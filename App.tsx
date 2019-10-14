@@ -1,6 +1,6 @@
 // Get all the necessary components from React
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import * as firebase from "firebase";
 import {createAppContainer} from 'react-navigation';
@@ -17,6 +17,7 @@ import GlucoseScreen from './src/screens/GlucoseScreen';
 import NutritionScreen from './src/screens/NutritionScreen';
 import ViewDataScreen from './src/screens/ViewDataScreen';
 
+
 const MainNavigator = createStackNavigator({
   Login: { screen: LoginScreen },
   SignUp: { screen: SignUpScreen },
@@ -26,6 +27,17 @@ const MainNavigator = createStackNavigator({
   Nutrition: { screen: NutritionScreen },
   ViewDataScreen: { screen: ViewDataScreen },
 });
+
+
+var config = {
+    databaseURL: "<database-url>",
+    projectId: "<project-id>",
+};
+
+if (!firebase.apps.length) {
+    firebase.initializeApp(config);
+}
+
 
 // Tired of seeing those pesky warnings in the
 // emulator? This disables them. Remove if needed

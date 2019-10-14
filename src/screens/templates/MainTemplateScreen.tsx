@@ -33,7 +33,7 @@ export default class MainTemplateScreen extends Component {
     glucose: GlucoseScreen,
     nutrition: NutritionScreen,
     exercise: ExerciseScreen,
-    viewdata: ViewDataScreen
+    viewdata: ViewDataScreen,
   });
 
   render() {
