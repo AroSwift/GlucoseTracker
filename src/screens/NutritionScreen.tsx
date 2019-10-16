@@ -40,6 +40,7 @@ export default class NutritionScreen extends Component {
 
 
 
+
               const response = await fetch( 'https://api.nal.usda.gov/fdc/v1/search?api_key=yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1',  {
                   method: 'POST',
                   headers: {
