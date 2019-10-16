@@ -37,27 +37,51 @@ export default class NutritionScreen extends Component {
 
 
         try {
-              // const response = await fetch("https://randomuser.me/api?results=10");
-              // const json = await response.json();
-              // this.setState({ dataSource: json.results});
 
 
 
-           const response = await fetch('https://yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ@api.nal.usda.gov/fdc/v1/search', {
+              const response = await fetch( 'https://api.nal.usda.gov/fdc/v1/search?api_key=yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1',  {
                   method: 'POST',
                   headers: {
-                        Accept: 'application/json',
-                        'Content-Type' : 'application/json',
-                    },
-                    body: JSON.stringify({
-                      api_key: 'yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1',
-                      generalSearchInput: this.state.foodName,
-                    }),
+                      Accept: 'application/json',
+                      'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                      //api_key: 'yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ',
+                      generalSearchInput: 'apple',
+                  }),
+              })
+               .then(
+                  (response) => response.json()
+                )
+                .then((responseData) => {
+                          console.log(
+                              "POST Response",
+                                "Response Body -> " + JSON.stringify(responseData)
+      )
+  })
 
-                  })
-                  .then()
-                  const json = await response.json();
-                  this.setState({dataSource: json.results});
+
+
+
+
+
+
+
+
+           // const response = await fetch('https://@api.nal.usda.gov/fdc/v1/search', {
+           //        method: 'POST',
+           //        headers: {
+           //              Accept: 'application/json',
+           //              'Content-Type' : 'application/json',
+           //          },
+           //          body: JSON.stringify({
+           //            api_key: 'yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1',
+           //            generalSearchInput: this.state.foodName,
+           //          }),
+           //
+           //        })
+
 
 
         }
