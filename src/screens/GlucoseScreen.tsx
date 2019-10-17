@@ -31,13 +31,13 @@ export default class GlucoseScreen extends Component {
   }
 
   render() {
-    let before_after = [{
+    let before_after_options = [{
       value: 'Before',
     }, {
       value: 'After',
     }];
 
-    let meal = [{
+    let meal_options = [{
       value: 'Breakfast',
     }, {
       value: 'Lunch',
@@ -51,12 +51,12 @@ export default class GlucoseScreen extends Component {
           <Dropdown
             label='Before / After'
             onChangeText={before_after => this.setState({ before_after })}
-            data={before_after}
+            data={before_after_options}
           />
           <Dropdown
             label='Breakfast / Lunch / Dinner'
             onChangeText={meal => this.setState({ meal })}
-            data={meal}
+            data={meal_options}
           />
           <View style={styles.breakAfterDropdown}></View>
           <TextInput
