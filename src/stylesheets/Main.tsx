@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
 
+  breakAfterDropdown: {
+    marginBottom: 14,
+  },
+
   bottomNav: {
     position: 'absolute',
     left: 0,
@@ -20,6 +24,12 @@ const styles = StyleSheet.create({
     color: 'darkred',
     textAlign: 'center',
     paddingBottom: 15,
+  },
+
+  // -- Header specific --
+  ApplicationHeader: {
+    position: 'relative',
+    top: 0,
   },
 
   // -- Login specific --

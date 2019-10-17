@@ -1,6 +1,6 @@
 // Get all the necessary components from React
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import {
   Button, TextInput, Text, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
@@ -10,16 +10,24 @@ import { styles } from '../stylesheets/Main';
 //import db from 'firebase';
 import { firebase } from '../config';
 
-
+// TODO: add date picker after blood glucose level
 export default class GlucoseScreen extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-          blood_glucose_level: '',
-          error: false,
-          errorMessage: null
+      before_after: '',
+      meal: '',
+      blood_glucose_level: '',
+      error: false,
+      errorMessage: null
     };
+  }
+
+  handleAdd() {
+    console.log(this.state.before_after);
+    console.log(this.state.meal);
+    console.log(this.state.blood_glucose_level);
   }
 
   render() {
@@ -42,13 +50,15 @@ export default class GlucoseScreen extends Component {
         <Surface style={styles.loginContainer}>
           <Dropdown
             label='Before / After'
+            onChangeText={before_after => this.setState({ before_after })}
             data={before_after}
           />
           <Dropdown
             label='Breakfast / Lunch / Dinner'
+            onChangeText={meal => this.setState({ meal })}
             data={meal}
-            style={styles.breakAfter}
           />
+          <View style={styles.breakAfterDropdown}></View>
           <TextInput
             label='Blood Glucose Level'
             autoCapitalize="none"
@@ -58,7 +68,7 @@ export default class GlucoseScreen extends Component {
             error={this.state.error}
           />
           <Button mode="contained"
-             onPress={() => this.props.navigation.navigate('Glucose')}>
+             onPress={() => this.handleAdd()}>
                 Submit
           </Button>
         </Surface>
