@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  // Application wide
+  // -- Application wide --
   breakAfter: {
     marginBottom: 20,
   },
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   },
 
-  // Login specific
+  // -- Login specific --
   loginContainer: {
     padding: 20,
     position: 'absolute',
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 
-  // Signup specific
+  // -- Signup specific --
   signupContainer: {
     padding: 20,
     position: 'absolute',
