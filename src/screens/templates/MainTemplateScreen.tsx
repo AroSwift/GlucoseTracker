@@ -14,16 +14,23 @@ import NutritionScreen from '../NutritionScreen';
 import ExerciseScreen from '../ExerciseScreen';
 import ViewDataScreen from '../ViewDataScreen';
 
-
 export default class MainTemplateScreen extends Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   state = {
     index: 0,
     routes: [
-      { key: 'glucose', title: 'Glucose', icon: 'healing' },
-      { key: 'nutrition', title: 'Nutrition', icon: 'local-cafe' },
-      { key: 'exercise', title: 'Exercise', icon: 'directions-bike' },
-      { key: 'viewdata', title: 'View Data', icon: 'settings-applications' },
+      { key: 'glucose', title: 'Glucose', icon: 'healing',
+        navigation: this.props.navigation },
+      { key: 'nutrition', title: 'Nutrition', icon: 'local-cafe',
+        navigation: this.props.navigation },
+      { key: 'exercise', title: 'Exercise', icon: 'directions-bike',
+        navigation: this.props.navigation },
+      { key: 'viewdata', title: 'View Data', icon: 'settings-applications',
+        navigation: this.props.navigation },
     ],
   };
 

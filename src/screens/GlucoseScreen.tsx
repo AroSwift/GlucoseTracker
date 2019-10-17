@@ -68,8 +68,8 @@ export default class GlucoseScreen extends Component {
             error={this.state.error}
           />
           <Button mode="contained"
-             onPress={() => this.handleAdd()}>
-                Submit
+            onPress={() => this.handleAdd()}>
+            Submit
           </Button>
         </Surface>
       </PaperProvider>
