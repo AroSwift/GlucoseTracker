@@ -15,6 +15,7 @@ import {
   MenuOptions,
   MenuOption,
 } from 'react-native-popup-menu';
+import { Dropdown } from 'react-native-material-dropdown';
 
 
 export default class NutritionScreen extends Component {
@@ -93,18 +94,31 @@ export default class NutritionScreen extends Component {
 
 
 render(){
-
+  let meal_options = [{ value: 'Breakfast', }, { value: 'Lunch', }, { value: 'Dinner', }];
+  let before_after_options = [{ value: 'Before', }, { value: 'After',  }];
 
 return(
 
   <PaperProvider>
     <Surface style={styles.loginContainer}>
-      <Text style={styles.loginHeader}>Input Food Name</Text>
+
+      <Text style={styles.loginHeader}>Add Food</Text>
       { this.state.errorMessage != null &&
         <Text style={styles.mainError}>{this.state.errorMessage}</Text>
       }
+
+      <Dropdown
+        label='Before / After'
+        onChangeText={before_after => this.setState({ before_after })}
+        data={before_after_options}
+      />
+      <Dropdown
+        label='Breakfast / Lunch / Dinner'
+        onChangeText={meal => this.setState({ meal })}
+        data={meal_options}
+      />
       <TextInput
-        label='Food Name'
+        label='Enter Food'
         autoCapitalize="none"
         value={this.state.foodName}
         onChangeText={foodName => this.setState({ foodName })}
@@ -128,6 +142,11 @@ return(
           {item.foods.foodName}
       </Text>}
      />
+
+     <Button mode="contained"
+       onPress={() => this.handleAdd()}>
+       Submit
+     </Button>
 
     </Surface>
   </PaperProvider>
