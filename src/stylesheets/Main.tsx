@@ -10,15 +10,6 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-  bottomNav: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
-    display: 'flex',
-    justifyContent: 'flex-start',
-  },
-
   // Main error message
   mainError: {
     color: 'darkred',
@@ -30,9 +21,6 @@ const styles = StyleSheet.create({
   ApplicationHeader: {
     position: 'relative',
     top: 0,
-
-    
-
   },
 
   // -- Login specific --
