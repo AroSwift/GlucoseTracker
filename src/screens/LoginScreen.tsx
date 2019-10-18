@@ -40,6 +40,28 @@ export default class LoginScreen extends Component {
           .signInWithEmailAndPassword(email, password);
 
         console.log("Already logged in");
+        console.log(uid)
+
+        console.log('before');
+        // let users = firebase.firestore().collection('users');
+        // let query = users.where('auth_id', '==', uid).get()
+        //   .then(doc => {
+        //     if (!doc.exists) {
+        //       console.log('No such document!');
+        //     } else {
+        //       console.log('Document data:', doc.data());
+        //     }
+        //   })
+
+        let users = firebase.firestore().collection('users');
+        let query = users.get()
+          .then(snapshot => {
+            snapshot.forEach(doc => {
+              console.log(doc.auth_id, '=>', doc.data());
+            });
+          })
+
+        console.log('after');
 
         // Navigate to the Home page
         return this.props.navigation.replace('MainTemplate');
@@ -59,8 +81,6 @@ export default class LoginScreen extends Component {
             .then(data => {
               this.setState({ auth_uid: data.user.uid});
             });
-
-          console.log(firebase.firestore().collection('users').doc(this.state.auth_uid));
 
           await AsyncStorage.setItem('@GlucoseTracker:auth_uid', this.state.auth_uid);
           await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
