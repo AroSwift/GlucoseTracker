@@ -40,26 +40,27 @@ export default class LoginScreen extends Component {
           .signInWithEmailAndPassword(email, password);
 
         console.log("Already logged in");
-        console.log(uid)
 
         console.log('before');
+
         // let users = firebase.firestore().collection('users');
-        // let query = users.where('auth_id', '==', uid).get()
-        //   .then(doc => {
-        //     if (!doc.exists) {
-        //       console.log('No such document!');
-        //     } else {
-        //       console.log('Document data:', doc.data());
-        //     }
-        //   })
+        // let query = users.doc(uid).get().data()
+        // .then(snapshot => {
+        //     console.log(snapshot);
+        //     console.log(doc.uid);
+        //     console.log(doc.auth_id, '=>', doc.data());
+        // });
 
         let users = firebase.firestore().collection('users');
-        let query = users.get()
+        let query = users.where('auth_id', '==', uid).get()
           .then(snapshot => {
             snapshot.forEach(doc => {
+              console.log(doc.id);
               console.log(doc.auth_id, '=>', doc.data());
             });
           })
+
+        console.log(query);
 
         console.log('after');
 
