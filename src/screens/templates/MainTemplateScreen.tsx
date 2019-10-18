@@ -15,6 +15,18 @@ import ExerciseScreen from '../ExerciseScreen';
 import SettingsScreen from '../SettingsScreen';
 
 export default class MainTemplateScreen extends Component {
+  static navigationOptions = {
+  title: "Glucose Tracker",
+  headerStyle: { marginTop: 24 },
+  headerStyle: {
+      backgroundColor: '#6221ea',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold',
+    },
+  };
+
 
   constructor(props) {
     super(props);
@@ -43,15 +55,19 @@ export default class MainTemplateScreen extends Component {
     settings: SettingsScreen,
   });
 
+/*
+  <Appbar.Header>
+    <Appbar.Content
+      title="Glucose Tracker"
+      subtitle={this.state.routes[this.state.index].title}
+    />
+  </Appbar.Header>
+  */
+
   render() {
     return (
       <PaperProvider>
-        <Appbar.Header>
-          <Appbar.Content
-            title="Glucose Tracker"
-            subtitle={this.state.routes[this.state.index].title}
-          />
-        </Appbar.Header>
+
 
         <BottomNavigation
           navigationState={this.state}

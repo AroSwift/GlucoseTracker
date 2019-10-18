@@ -30,6 +30,9 @@ const styles = StyleSheet.create({
   ApplicationHeader: {
     position: 'relative',
     top: 0,
+
+    
+
   },
 
   // -- Login specific --
