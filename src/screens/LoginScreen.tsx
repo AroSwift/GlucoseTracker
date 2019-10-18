@@ -11,30 +11,30 @@ import { styles } from '../stylesheets/Main';
 //import db from 'firebase';
 import { firebase } from '../config';
 
-//
-// firebase.auth().signInWithCustomToken(token).catch(function(error) {
-//   // Handle Errors here.
-//   var errorCode = error.code;
-//   var errorMessage = error.message;
-//   // ...
-// });
 
 export default class LoginScreen extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
           email: '',
           password: '',
+          auth_uid: null,
           error: false,
           errorMessage: null
     };
+
+    // this.handlePreviousLogin = this.handlePreviousLogin.bind(this);
+    // this.handleLogin = this.handleLogin.bind(this);
+
     this.handlePreviousLogin();
   }
 
   // Previously logged in
   async handlePreviousLogin() {
     try {
+      var uid = await AsyncStorage.getItem('@GlucoseTracker:auth_uid');
       var email = await AsyncStorage.getItem('@GlucoseTracker:email');
       var password = await AsyncStorage.getItem('@GlucoseTracker:password');
 
@@ -46,7 +46,7 @@ export default class LoginScreen extends Component {
       console.log("Already logged in");
 
       // Navigate to the Home page
-      return this.props.navigation.replace('MainTemplate');
+      return this.props.navigation.replace('MainTemplate'); // .replace
     } catch(error) {
       console.log("Not already logged in");
     }
@@ -56,16 +56,24 @@ export default class LoginScreen extends Component {
   async handleLogin() {
 
       try {
+        var uid = '';
           await firebase.auth()
-              .signInWithEmailAndPassword(this.state.email, this.state.password);
+              .signInWithEmailAndPassword(this.state.email, this.state.password)
+              .then(data => {
+                this.setState({ auth_uid: uid});
+              });
 
+          await AsyncStorage.setItem('@GlucoseTracker:auth_uid', this.state.auth_uid);
           await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
           await AsyncStorage.setItem('@GlucoseTracker:password', this.state.password);
+
+
+          console.log(this.state.auth_uid)
 
           console.log("Logged In!");
 
           // Navigate to the Home page
-          return this.props.navigation.replace('Nutrition');
+          return this.props.navigation.replace('MainTemplate'); // .replace
       } catch (error) {
           console.log(error);
 

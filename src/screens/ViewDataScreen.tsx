@@ -21,6 +21,7 @@ export default class ViewDataScreen extends Component {
   // Logout
   async handleLogOut() {
     try {
+      await AsyncStorage.removeItem('@GlucoseTracker:auth_uid');
       await AsyncStorage.removeItem('@GlucoseTracker:email');
       await AsyncStorage.removeItem('@GlucoseTracker:password');
 
