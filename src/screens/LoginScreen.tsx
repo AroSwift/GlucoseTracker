@@ -38,15 +38,18 @@ export default class LoginScreen extends Component {
       var email = await AsyncStorage.getItem('@GlucoseTracker:email');
       var password = await AsyncStorage.getItem('@GlucoseTracker:password');
 
-      console.log(email);
+      console.log(uid, email, password);
 
-      await firebase.auth()
-          .signInWithEmailAndPassword(email, password);
+      // Probably more secure, but too slow for now
+      // await firebase.auth()
+      //     .signInWithEmailAndPassword(email, password);
 
-      console.log("Already logged in");
+      if(uid != null && email != null && password != null) {
+        console.log("Already logged in");
 
-      // Navigate to the Home page
-      return this.props.navigation.replace('MainTemplate');
+        // Navigate to the Home page
+        return this.props.navigation.replace('MainTemplate');
+      }
     } catch(error) {
       console.log("Not already logged in");
     }
@@ -58,10 +61,10 @@ export default class LoginScreen extends Component {
       try {
         var uid = '';
           await firebase.auth()
-              .signInWithEmailAndPassword(this.state.email, this.state.password)
-              .then(data => {
-                this.setState({ auth_uid: uid});
-              });
+            .signInWithEmailAndPassword(this.state.email, this.state.password)
+            .then(data => {
+              this.setState({ auth_uid: data.user.uid});
+            });
 
           await AsyncStorage.setItem('@GlucoseTracker:auth_uid', this.state.auth_uid);
           await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
