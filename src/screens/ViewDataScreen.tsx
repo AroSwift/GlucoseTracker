@@ -27,7 +27,6 @@ export default class ViewDataScreen extends Component {
 
       return this.props.route.navigation.replace('Login');
     } catch (err) {
-      console.log('errored');
       console.log(err);
     }
   }
