@@ -10,11 +10,11 @@ import { styles } from '../stylesheets/Main';
 import { firebase } from '../config';
 
 
-export default class ViewDataScreen extends Component {
+export default class Settings extends Component {
 
   constructor(props) {
     super(props);
-    console.log('view_data_screen');
+    console.log('settings_screen');
     console.log(props.route.navigation);
   }
 

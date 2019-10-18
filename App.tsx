@@ -15,7 +15,7 @@ import MainTemplateScreen from './src/screens/templates/MainTemplateScreen';
 import ExerciseScreen from './src/screens/ExerciseScreen';
 import GlucoseScreen from './src/screens/GlucoseScreen';
 import NutritionScreen from './src/screens/NutritionScreen';
-import ViewDataScreen from './src/screens/ViewDataScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 
 
 const MainNavigator = createStackNavigator({
@@ -25,7 +25,7 @@ const MainNavigator = createStackNavigator({
   Exercise: { screen: ExerciseScreen },
   Glucose: { screen: GlucoseScreen },
   Nutrition: { screen: NutritionScreen },
-  ViewData: { screen: ViewDataScreen },
+  Settings: { screen: SettingsScreen },
 });
 
 

@@ -12,7 +12,7 @@ import { firebase } from '../../config';
 import GlucoseScreen from '../GlucoseScreen';
 import NutritionScreen from '../NutritionScreen';
 import ExerciseScreen from '../ExerciseScreen';
-import ViewDataScreen from '../ViewDataScreen';
+import SettingsScreen from '../SettingsScreen';
 
 export default class MainTemplateScreen extends Component {
 
@@ -29,7 +29,7 @@ export default class MainTemplateScreen extends Component {
         navigation: this.props.navigation },
       { key: 'exercise', title: 'Exercise', icon: 'directions-bike',
         navigation: this.props.navigation },
-      { key: 'viewdata', title: 'View Data', icon: 'settings-applications',
+      { key: 'settings', title: 'Settings', icon: 'settings-applications',
         navigation: this.props.navigation },
     ],
   };
@@ -40,7 +40,7 @@ export default class MainTemplateScreen extends Component {
     glucose: GlucoseScreen,
     nutrition: NutritionScreen,
     exercise: ExerciseScreen,
-    viewdata: ViewDataScreen,
+    settings: SettingsScreen,
   });
 
   render() {
