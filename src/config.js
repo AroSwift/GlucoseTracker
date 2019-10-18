@@ -1,6 +1,8 @@
 // Documentation: https://firebase.google.com/docs/web/setup
 
-import Firebase from 'firebase';
+import * as Firebase from 'firebase';
+import 'firebase/firestore';
+
 let firebase = Firebase.initializeApp(
    {
     apiKey: "AIzaSyBEU8YtYO5uKQwiWCuBT0MHl0u4CxtAAQA",

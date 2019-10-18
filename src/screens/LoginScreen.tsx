@@ -25,9 +25,6 @@ export default class LoginScreen extends Component {
           errorMessage: null
     };
 
-    // this.handlePreviousLogin = this.handlePreviousLogin.bind(this);
-    // this.handleLogin = this.handleLogin.bind(this);
-
     this.handlePreviousLogin();
   }
 
@@ -38,13 +35,10 @@ export default class LoginScreen extends Component {
       var email = await AsyncStorage.getItem('@GlucoseTracker:email');
       var password = await AsyncStorage.getItem('@GlucoseTracker:password');
 
-      console.log(uid, email, password);
-
-      // Probably more secure, but too slow for now
-      // await firebase.auth()
-      //     .signInWithEmailAndPassword(email, password);
-
       if(uid != null && email != null && password != null) {
+        await firebase.auth()
+          .signInWithEmailAndPassword(email, password);
+
         console.log("Already logged in");
 
         // Navigate to the Home page
@@ -66,12 +60,11 @@ export default class LoginScreen extends Component {
               this.setState({ auth_uid: data.user.uid});
             });
 
+          console.log(firebase.firestore().collection('users').doc(this.state.auth_uid));
+
           await AsyncStorage.setItem('@GlucoseTracker:auth_uid', this.state.auth_uid);
           await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
           await AsyncStorage.setItem('@GlucoseTracker:password', this.state.password);
-
-
-          console.log(this.state.auth_uid)
 
           console.log("Logged In!");
 
@@ -87,8 +80,6 @@ export default class LoginScreen extends Component {
           });
       }
   }
-
-//    console.log(firebase.storage()); // also can do .firestore()
 
   render() {
     return (
