@@ -73,6 +73,11 @@ render() {
             style={styles.breakAfter}>
             Sign Up
           </Button>
+          <Button
+            mode="contained"
+            onPress={() => this.props.navigation.navigate('Login')}>
+                Already have an account? Login.
+          </Button>
         </Surface>
       </PaperProvider>
     )
