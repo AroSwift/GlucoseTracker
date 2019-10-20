@@ -67,7 +67,6 @@ export default class ExerciseScreen extends Component {
                   icon={require('../../assets/plus.png')}
                   size={60}
                   onPress={() => this.handleAdd()}>
-
           </IconButton>
         </PaperProvider>
       );
