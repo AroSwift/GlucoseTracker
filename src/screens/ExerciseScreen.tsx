@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
-  Button, TextInput, Text, Surface, Card, Provider as PaperProvider
+  IconButton, Button, TextInput, Text, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
 import { Dropdown } from 'react-native-material-dropdown';
 // Get all the stylesheets
@@ -62,6 +62,13 @@ export default class ExerciseScreen extends Component {
                   Submit
             </Button>
           </Surface>
+          <IconButton
+                  style={styles.circularButton}
+                  icon={require('../../assets/plus.png')}
+                  size={60}
+                  onPress={() => this.handleAdd()}>
+
+          </IconButton>
         </PaperProvider>
       );
     }

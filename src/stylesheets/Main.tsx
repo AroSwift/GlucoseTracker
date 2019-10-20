@@ -19,6 +19,18 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 
+  circularButton: {
+    flex: 1,
+    backgroundColor: 'rgb(98, 33, 234)',
+    position: 'absolute',
+    bottom:20,
+    right:20,
+    padding: 5,
+    height: 65,
+    width: 65,  //The Width must be the same as the height
+    borderRadius: 130, //Then Make the Border Radius twice the size of width or Height
+  },
+
   // Main error message
   mainError: {
     color: 'darkred',
