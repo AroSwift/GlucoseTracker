@@ -42,6 +42,8 @@ if (!firebase.apps.length) {
 // Tired of seeing those pesky warnings in the
 // emulator? This disables them. Remove if needed
 console.disableYellowBox = true;
+// Stop Android Firebase timer warning from displaying
+console.ignoredYellowBox = ['Setting a timer'];
 
 const App = createAppContainer(MainNavigator);
 
