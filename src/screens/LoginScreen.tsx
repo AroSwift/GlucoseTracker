@@ -20,6 +20,7 @@ export default class LoginScreen extends Component {
     this.state = {
           email: '',
           password: '',
+          user_uid: null,
           auth_uid: null,
           error: false,
           errorMessage: null
@@ -31,18 +32,19 @@ export default class LoginScreen extends Component {
   // Previously logged in
   async handlePreviousLogin() {
     try {
-      var uid = await AsyncStorage.getItem('@GlucoseTracker:auth_uid');
+      var user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
+      var auth_uid = await AsyncStorage.getItem('@GlucoseTracker:auth_uid');
       var email = await AsyncStorage.getItem('@GlucoseTracker:email');
       var password = await AsyncStorage.getItem('@GlucoseTracker:password');
 
-      if(uid != null && email != null && password != null) {
+      if(auth_uid != null && email != null && password != null && user_uid != null) {
         await firebase.auth()
           .signInWithEmailAndPassword(email, password);
 
-        console.log("Already logged in");
+        console.log("Already logged in", user_uid);
 
         // Navigate to the Home page
-        return this.props.navigation.replace('MainTemplate');
+        return this.props.navigation.replace('MainTemplate', { user_uid: user_uid });
       }
     } catch(error) {
       console.log("Not already logged in");
@@ -53,23 +55,35 @@ export default class LoginScreen extends Component {
   async handleLogin() {
 
       try {
-        var uid = '';
           await firebase.auth()
             .signInWithEmailAndPassword(this.state.email, this.state.password)
             .then(data => {
               this.setState({ auth_uid: data.user.uid});
             });
 
-          console.log(firebase.firestore().collection('users').doc(this.state.auth_uid));
+          let users = firebase.firestore().collection('users');
+          let query = await users.where('auth_id', '==', this.state.auth_uid).get()
+            .then(snapshot => {
+              var user_uids = []
+              snapshot.forEach(doc => {
+                user_uids.push(doc.id);
+                // console.log(doc.auth_id, '=>', doc.data());
+              });
+              console.log(user_uids);
+              this.setState({ user_uid: user_uids[0] });
+            })
 
+          console.log(this.state.user_uid);
+
+          await AsyncStorage.setItem('@GlucoseTracker:user_uid', this.state.user_uid);
           await AsyncStorage.setItem('@GlucoseTracker:auth_uid', this.state.auth_uid);
           await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
           await AsyncStorage.setItem('@GlucoseTracker:password', this.state.password);
 
-          console.log("Logged In!");
+          console.log("Logged In!", this.state.user_uid);
 
           // Navigate to the Home page
-          return this.props.navigation.replace('MainTemplate');
+          return this.props.navigation.replace('MainTemplate', { user_uid: this.state.user_uid });
       } catch (error) {
           console.log(error);
 
