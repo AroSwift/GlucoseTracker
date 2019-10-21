@@ -95,7 +95,6 @@ export default class NutritionScreen extends Component {
 
 render(){
   let meal_options = [{ value: 'Breakfast', }, { value: 'Lunch', }, { value: 'Dinner', }];
-  let before_after_options = [{ value: 'Before', }, { value: 'After',  }];
 
 return(
 
@@ -107,11 +106,6 @@ return(
         <Text style={styles.mainError}>{this.state.errorMessage}</Text>
       }
 
-      <Dropdown
-        label='Before / After'
-        onChangeText={before_after => this.setState({ before_after })}
-        data={before_after_options}
-      />
       <Dropdown
         label='Breakfast / Lunch / Dinner'
         onChangeText={meal => this.setState({ meal })}
