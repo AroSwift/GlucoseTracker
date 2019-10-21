@@ -24,10 +24,19 @@ export default class GlucoseScreen extends Component {
     };
   }
 
-  handleAdd() {
-    console.log(this.state.before_after);
-    console.log(this.state.meal);
-    console.log(this.state.blood_glucose_level);
+  async handleAdd() {
+    try {
+      let exercise = firebase.firestore().collection('glucose').doc(); //.doc(this.make_id(20));
+      exercise.set({
+          before_after: this.state.before_after,
+          meal: this.state.meal,
+          blood_glucose_level: parseInt(this.state.blood_glucose_level),
+          user_id: this.props.route.user_uid
+      });
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   render() {
