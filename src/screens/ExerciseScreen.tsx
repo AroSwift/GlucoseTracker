@@ -23,10 +23,22 @@ export default class ExerciseScreen extends Component {
       };
     }
 
-    handleAdd() {
-      console.log(this.state.exercise_type);
-      console.log(this.state.meal);
-      console.log(this.state.exercise_duration);
+    async handleAdd() {
+      try {
+        console.log(this.state.exercise_type);
+        console.log(this.state.exercise_duration);
+        console.log("the route;",this.props.route.user_uid);
+
+        let exercise = firebase.firestore().collection('exercise').doc(); //.doc(this.make_id(20));
+        exercise.set({
+            duration: parseInt(this.state.exercise_duration),
+            type: this.state.exercise_type,
+            user_id: this.props.route.user_uid
+        });
+
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     render() {

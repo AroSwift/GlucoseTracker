@@ -36,13 +36,13 @@ export default class MainTemplateScreen extends Component {
     index: 0,
     routes: [
       { key: 'glucose', title: 'Glucose', icon: 'healing',
-        navigation: this.props.navigation },
+        navigation: this.props.navigation, user_uid: this.props.navigation.state.params.user_uid },
       { key: 'nutrition', title: 'Nutrition', icon: 'local-cafe',
-        navigation: this.props.navigation },
+        navigation: this.props.navigation, user_uid: this.props.navigation.state.params.user_uid },
       { key: 'exercise', title: 'Exercise', icon: 'directions-bike',
-        navigation: this.props.navigation },
+        navigation: this.props.navigation, user_uid: this.props.navigation.state.params.user_uid },
       { key: 'settings', title: 'Settings', icon: 'settings-applications',
-        navigation: this.props.navigation },
+        navigation: this.props.navigation, user_uid: this.props.navigation.state.params.user_uid },
     ],
   };
 
