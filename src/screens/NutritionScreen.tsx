@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { FlatList, StyleSheet, AsyncStorage } from 'react-native';
 import {
-  Button, IconButton, TextInput, Text, Surface, Card, Provider as PaperProvider
+  Button, Colors, IconButton, TextInput, Text, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
 // Get all the stylesheets
 import { styles } from '../stylesheets/Main';
@@ -145,6 +145,7 @@ return(
     </Surface>
     <IconButton
             style={styles.circularButton}
+            color={Colors.white}
             icon={require('../../assets/plus.png')}
             size={60}
             onPress={() => this.handleAdd()}>

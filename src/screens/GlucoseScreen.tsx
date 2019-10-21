@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
-  Button, IconButton, TextInput, Text, Surface, Card, Provider as PaperProvider
+  Button, Colors, IconButton, TextInput, Text, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
 import { Dropdown } from 'react-native-material-dropdown';
 // Get all the stylesheets
@@ -74,6 +74,7 @@ export default class GlucoseScreen extends Component {
         </Surface>
         <IconButton
                 style={styles.circularButton}
+                color={Colors.white}
                 icon={require('../../assets/plus.png')}
                 size={60}
                 onPress={() => this.handleAdd()}>
