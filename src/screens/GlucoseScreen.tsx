@@ -56,7 +56,13 @@ export default class GlucoseScreen extends Component {
 
     return (
       <PaperProvider>
-        <Surface style={styles.loginContainer}>
+        <Surface style={styles.contentContainer}>
+
+        <Text style={styles.generalHeader}>Add Glucose</Text>
+        { this.state.errorMessage != null &&
+          <Text style={styles.mainError}>{this.state.errorMessage}</Text>
+        }
+
           <Dropdown
             label='Before / After'
             onChangeText={before_after => this.setState({ before_after })}

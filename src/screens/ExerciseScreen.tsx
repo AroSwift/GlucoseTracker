@@ -54,7 +54,14 @@ export default class ExerciseScreen extends Component {
 
       return (
         <PaperProvider>
-          <Surface style={styles.loginContainer}>
+          <Surface style={styles.contentContainer}>
+
+          <Text style={styles.generalHeader}>Add Exercise</Text>
+          { this.state.errorMessage != null &&
+            <Text style={styles.mainError}>{this.state.errorMessage}</Text>
+          }
+
+
             <Dropdown
               label='Exercise Type'
               onChangeText={exercise_type => this.setState({ exercise_type })}

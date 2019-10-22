@@ -24,23 +24,26 @@ export default class NutritionScreen extends Component {
     super(props);
     this.state = {
           foodName: '',
+          specFoodID: '',
           error: false,
           errorMessage: null,
           loading: true,
-          dataSource:[]
+          dataSource:[],
+          specDataSource:[]
     };
   }
 
+    async handleAdd() {
+
+    }
 
 
-    async handleAPIRequest() {
+
+    async handleGeneralAPIRequest() {
         //Uses search data to call from food API
 
 
         try {
-
-
-
 
               const response = await fetch( 'https://api.nal.usda.gov/fdc/v1/search?api_key=yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1',  {
                   method: 'POST',
@@ -49,47 +52,63 @@ export default class NutritionScreen extends Component {
                       'Content-Type': 'application/json',
                   },
                   body: JSON.stringify({
-                      //api_key: 'yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ',
-                      generalSearchInput: 'apple',
+                      generalSearchInput: this.state.foodName,
                   }),
               })
-               .then(
-                  (response) => response.json()
-                )
-                .then((responseData) => {
+               .then((response) => response.json() )
+                .then((responseJson) => {
                           console.log(
                               "POST Response",
-                                "Response Body -> " + JSON.stringify(responseData)
-      )
-  })
+                              "Response Body -> " + JSON.stringify(responseJson)
+                          )
+
+                          this.setState({
+                            isLoading: false,
+                            dataSource: responseJson,
+                          }, function(){
+                          });
 
 
-
-
-
-
-
-
-
-           // const response = await fetch('https://@api.nal.usda.gov/fdc/v1/search', {
-           //        method: 'POST',
-           //        headers: {
-           //              Accept: 'application/json',
-           //              'Content-Type' : 'application/json',
-           //          },
-           //          body: JSON.stringify({
-           //            api_key: 'yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1',
-           //            generalSearchInput: this.state.foodName,
-           //          }),
-           //
-           //        })
-
-
+              })
 
         }
         catch (error) { console.error(error)}
 
-  }
+        }
+
+
+        async handleSpecificAPIRequest() {
+            //Uses search data to call from food API
+
+
+            try {
+
+                  const response = await fetch('https://api.nal.usda.gov/fdc/v1/' + this.state.specFoodID + '?api_key=yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1')
+
+                   .then(
+                      (response) => response.json()
+                  )
+                    .then((responseData) => {
+                              console.log(
+                                  "Good Reply",
+                                  "Response Body -> " + JSON.stringify(responseData)
+                                )
+
+                                this.setState({
+                                  isLoading: false,
+                                  specDataSource: responseData,
+                                }, function(){
+                                });
+                  })
+
+            }
+            catch (error) { console.error(error)}
+
+            }
+
+
+
+
 
 
 
@@ -99,9 +118,9 @@ render(){
 return(
 
   <PaperProvider>
-    <Surface style={styles.loginContainer}>
+    <Surface style={styles.contentContainer}>
 
-      <Text style={styles.loginHeader}>Add Food</Text>
+      <Text style={styles.generalHeader}>Add Food</Text>
       { this.state.errorMessage != null &&
         <Text style={styles.mainError}>{this.state.errorMessage}</Text>
       }
@@ -122,10 +141,28 @@ return(
       <Button
         title="Search"
          mode="contained"
-         onPress={() => this.handleAPIRequest()}
+         onPress={() => this.handleGeneralAPIRequest()}
          style={styles.breakAfter}>
          Search
       </Button>
+
+      <TextInput
+        label='Enter Specific Food ID'
+        autoCapitalize="none"
+        value={this.state.specFoodID}
+        onChangeText={specFoodID => this.setState({ specFoodID })}
+        style={styles.breakAfter}
+        error={this.state.error}
+      />
+      <Button
+        title="Add Known Food"
+         mode="contained"
+         onPress={() => this.handleSpecificAPIRequest()}
+         style={styles.breakAfter}>
+         Add known food
+      </Button>
+
+
 
       <FlatList
        data={this.state.dataSource}
@@ -137,10 +174,6 @@ return(
       </Text>}
      />
 
-     <Button mode="contained"
-       onPress={() => this.handleAdd()}>
-       Submit
-     </Button>
 
     </Surface>
     <IconButton

@@ -10,3 +10,5 @@ npm-debug.*
 web-build/
 web-report/
 android/properties.local
+
+android/local.properties
