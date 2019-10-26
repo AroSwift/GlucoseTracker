@@ -16,6 +16,8 @@
     "react-app-rewired": "^2.1.4",
     "react-art": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-icons": "^3.8.0",
+    "react-native-vector-icons": "^6.6.0",
     "react-native-web": "^0.11.7",
     "react-scripts": "3.2.0",
     "react-toolbox": "^2.0.0-beta.6",
@@ -29,8 +31,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
-    "eject": "react-scripts eject",
-    "toolbox": "react-toolbox-themr"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
