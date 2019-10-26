@@ -3,19 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.6.3",
     "babel-cli": "^6.26.0",
+    "babel-loader": "^8.0.6",
     "babel-preset-react-app": "^3.1.2",
+    "file-loader": "^4.2.0",
     "react": "^16.11.0",
+    "react-app-rewired": "^2.1.4",
+    "react-art": "^16.11.0",
     "react-dom": "^16.11.0",
+    "react-native-web": "^0.11.7",
     "react-scripts": "3.2.0",
-    "react-toolbox": "^2.0.0-beta.13",
-    "webpack": "^4.41.0"
+    "react-toolbox": "^2.0.0-beta.6",
+    "react-toolbox-themr": "^1.0.2",
+    "save": "^2.4.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.2.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-scripts eject",
+    "toolbox": "react-toolbox-themr"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -1,11 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Button } from 'react-toolbox/lib/button';
+import * as React from 'react';
+import { Button } from 'react-native-paper';
 import './App.css';
 
 function App() {
   return (
-    <Button label="Hello World!" />
+    <Button icon="camera" mode="contained" onPress={() => console.log('Pressed')}>
+      Press me
+    </Button>
   );
 }
 
