@@ -1,13 +1,40 @@
 import * as React from 'react';
 import { View } from 'react-native';
-import { MdAccessibility, MdAccessible, MdSettings } from "react-icons/md"; // how to use: https://react-icons.netlify.com/#/icons/fa
+// how to use: https://react-icons.netlify.com/#/icons/fa
+import { FiLogIn, FiCheckSquare } from "react-icons/fi";
+import { MdAccessibility, MdAccessible, MdSettings } from "react-icons/md";
 import {
   Button, Text, Appbar, Provider as PaperProvider
 } from 'react-native-paper';
 import './stylesheets/Main.css';
 // import './App.css';
 
-export default class App extends React.Component {
+
+export class NotLoggedIn extends React.Component {
+  render() {
+    return (
+      <PaperProvider>
+        <Appbar.Header>
+          <Appbar.Content
+            title="Glucose Tracker"
+          />
+          <Button mode="text" onPress={() => console.log('login')} color="white">
+            <FiLogIn className="icon"/>
+            Login
+          </Button>
+
+          <Button mode="text" onPress={() => console.log('signup')} color="white">
+            <FiCheckSquare className="icon"/>
+            Sign Up
+          </Button>
+        </Appbar.Header>
+      </PaperProvider>
+    );
+  }
+}
+
+
+export class LoggedIn extends React.Component {
   render() {
     return (
       <PaperProvider>
@@ -32,5 +59,16 @@ export default class App extends React.Component {
         </Appbar.Header>
       </PaperProvider>
     );
+  }
+}
+
+export default class App extends React.Component {
+  render() {
+    const logged_in = false;
+      if(logged_in) {
+        return (<LoggedIn />);
+      } else {
+        return (<NotLoggedIn />);
+      }
   }
 }
