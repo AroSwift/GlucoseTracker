@@ -1,5 +1,33 @@
+/* -- General styles -- */
 .icon {
   padding-right: 7px;
   justify-content: center;
   align-items: center;
+}
+
+.breakAfter {
+  margin-bottom: 20px;
+}
+
+.smallBreakAfter {
+  margin-bottom: 10px;
+}
+
+
+/* -- Login specific -- */
+.loginContainer {
+  padding: 50px;
+  position: 'absolute';
+  top: '25%';
+  left: 0;
+  right: 0;
+  background-color: 'rgba(52, 52, 52, 0)';
+}
+
+.loginHeader {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
 }

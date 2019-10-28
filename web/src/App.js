@@ -1,17 +1,26 @@
 import * as React from 'react';
-import { View } from 'react-native';
 // how to use: https://react-icons.netlify.com/#/icons/fa
 import { FiLogIn, FiCheckSquare } from "react-icons/fi";
 import { MdAccessibility, MdAccessible, MdSettings } from "react-icons/md";
 import {
-  Button, Text, Appbar, Provider as PaperProvider
+  Button, Appbar, Provider as PaperProvider
 } from 'react-native-paper';
 import './stylesheets/Main.css';
-// import './App.css';
+// import * as firebase from "firebase";
 
+import LoginScreen from './LoginScreen';
 
 export class NotLoggedIn extends React.Component {
-  render() {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      current_page: 'login',
+    };
+  }
+
+  header(props) {
     return (
       <PaperProvider>
         <Appbar.Header>
@@ -29,6 +38,23 @@ export class NotLoggedIn extends React.Component {
           </Button>
         </Appbar.Header>
       </PaperProvider>
+    );
+  }
+
+  page_content(props) {
+    if(this.state.current_page === 'login') {
+      return (<LoginScreen />);
+    } else if(this.state.current_page === 'signup') {
+      return (<LoginScreen />); // change to signup
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.header()}
+        {this.page_content()}
+      </div>
     );
   }
 }
@@ -63,9 +89,17 @@ export class LoggedIn extends React.Component {
 }
 
 export default class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      logged_in: false,
+    };
+  }
+
   render() {
-    const logged_in = false;
-      if(logged_in) {
+      if(this.state.logged_in) {
         return (<LoggedIn />);
       } else {
         return (<NotLoggedIn />);
