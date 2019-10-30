@@ -50,3 +50,22 @@
   font-size: 22px;
   font-weight: bold;
 }
+
+
+/* -- Glucose specific -- */
+.glucoseContainer {
+  padding: 20px;
+  position: 'absolute';
+  top: '0%';
+  left: 0;
+  right: 0;
+  background-color: 'rgba(52, 52, 52, 0)';
+}
+
+.glucoseHeader {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}

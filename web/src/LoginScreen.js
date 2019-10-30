@@ -22,31 +22,6 @@ export default class LoginScreen extends React.Component {
           error: false,
           errorMessage: null
     };
-
-    this.handlePreviousLogin();
-  }
-
-  // Previously logged in
-  async handlePreviousLogin() {
-    try {
-      var user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
-      var auth_uid = await AsyncStorage.getItem('@GlucoseTracker:auth_uid');
-      var email = await AsyncStorage.getItem('@GlucoseTracker:email');
-      var password = await AsyncStorage.getItem('@GlucoseTracker:password');
-
-      if(auth_uid != null && email != null && password != null && user_uid != null) {
-        await firebase.auth()
-          .signInWithEmailAndPassword(email, password);
-
-        console.log("Already logged in", user_uid);
-
-        // Navigate to the Home page
-        // return this.props.navigation.replace('MainTemplate', { user_uid: user_uid });
-        // return (<SignUpScreen>);
-      }
-    } catch(error) {
-      console.log("Not already logged in");
-    }
   }
 
   // Trying to log in
@@ -79,9 +54,11 @@ export default class LoginScreen extends React.Component {
           await AsyncStorage.setItem('@GlucoseTracker:password', this.state.password);
 
           console.log("Logged In!", this.state.user_uid);
+          console.log("Logged In!", this.state.auth_uid);
+          console.log("Logged In!", this.state.email);
+          console.log("Logged In!", this.state.password);
 
-          // Navigate to the Home page
-          return this.props.navigation.replace('MainTemplate', { user_uid: this.state.user_uid });
+          this.props.on_handle_logged_in(true);
       } catch (error) {
           console.log(error);
 
@@ -92,7 +69,7 @@ export default class LoginScreen extends React.Component {
           });
       }
   }
-  
+
   render() {
     return (
       <PaperProvider>

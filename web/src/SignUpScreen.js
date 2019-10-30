@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AsyncStorage } from 'react-native';
+// import { AsyncStorage } from 'react-native';
 import {
   Button, TextInput, Text, Surface, Provider as PaperProvider
 } from 'react-native-paper';
