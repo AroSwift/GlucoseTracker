@@ -31,7 +31,7 @@ export class NotLoggedIn extends React.Component {
     this.page_content();
   }
 
-  on_handle_logged_in = (logged_in_status) => {
+  handle_logged_in = (logged_in_status) => {
     console.log(logged_in_status);
     // this.setState({logged_in: logged_in_status});
     this.props.on_handle_logged_in(logged_in_status);
@@ -60,12 +60,16 @@ export class NotLoggedIn extends React.Component {
 
   page_content(props) {
     if(this.state.current_page === 'login') {
-      return (<LoginScreen on_handle_current_page={this.handle_current_page} />);
+      return (<LoginScreen
+        on_handle_current_page={this.handle_current_page}
+        on_handle_logged_in={this.handle_logged_in} />);
     } else if(this.state.current_page === 'signup') {
       return (<SignUpScreen on_handle_current_page={this.handle_current_page} />);
     } else { // default
       this.setState({ current_page: 'login' }); // update for future
-      return (<LoginScreen on_handle_current_page={this.handle_current_page} />);
+      return (<LoginScreen
+        on_handle_current_page={this.handle_current_page}
+        on_handle_logged_in={this.handle_logged_in} />);
     }
   }
 
@@ -88,6 +92,12 @@ export class LoggedIn extends React.Component {
     this.state = {
       current_page: 'login',
     };
+  }
+
+  handle_logged_in = (logged_in_status) => {
+    console.log(logged_in_status);
+    // this.setState({logged_in: logged_in_status});
+    this.props.on_handle_logged_in(logged_in_status);
   }
 
   handle_current_page = (page) => {
@@ -126,10 +136,12 @@ export class LoggedIn extends React.Component {
     if(this.state.current_page === 'glucose') {
       return (<GlucoseScreen on_handle_current_page={this.handle_current_page} />);
     } else if(this.state.current_page === 'settings') {
-      return (<SettingsScreen on_handle_current_page={this.handle_current_page} />);
+      return (<SettingsScreen
+        on_handle_logged_in={this.handle_logged_in}
+        on_handle_current_page={this.handle_current_page} />);
     } else {
       this.setState({ current_page: 'glucose' });
-      return (<GlucoseScreen on_handle_current_page={this.handle_current_page} />);
+      return (<GlucoseScreen on_handle_logged_in={this.handle_logged_in} />);
     }
   }
 
@@ -157,7 +169,7 @@ export default class App extends React.Component {
     }
   }
 
-  on_handle_logged_in = (logged_in_status) => {
+  handle_logged_in = (logged_in_status) => {
     console.log('changing loggedIn status in App');
     console.log(logged_in_status);
     this.setState({logged_in: logged_in_status});
@@ -187,9 +199,9 @@ export default class App extends React.Component {
 
   render() {
       if(this.state.logged_in) {
-        return (<LoggedIn />);
+        return (<LoggedIn on_handle_logged_in={this.handle_logged_in} />);
       } else {
-        return (<NotLoggedIn />);
+        return (<NotLoggedIn on_handle_logged_in={this.handle_logged_in} />);
       }
   }
 }

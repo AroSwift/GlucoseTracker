@@ -20,7 +20,8 @@ export default class LoginScreen extends React.Component {
           user_uid: null,
           auth_uid: null,
           error: false,
-          errorMessage: null
+          errorMessage: null,
+          user_type: null,
     };
   }
 
@@ -37,28 +38,62 @@ export default class LoginScreen extends React.Component {
           let users = firebase.firestore().collection('users');
           await users.where('auth_id', '==', this.state.auth_uid).get()
             .then(snapshot => {
-              var user_uids = []
+              var user_ids = []
+              var user_admins = []
               snapshot.forEach(doc => {
-                user_uids.push(doc.id);
+                user_ids.push(doc.id);
+                user_admins.push(doc.data().admin);
                 // console.log(doc.auth_id, '=>', doc.data());
               });
-              console.log(user_uids);
-              this.setState({ user_uid: user_uids[0] });
-            })
+              console.log('user admin:', user_admins);
 
-          console.log(this.state.user_uid);
+              // When the user provided is an admin
+              if(user_admins[0]) {
+                this.setState({ user_type: 'admin' });
+                this.setState({ user_uid: user_ids[0] });
+              }
+            });
 
-          await AsyncStorage.setItem('@GlucoseTracker:user_uid', this.state.user_uid);
-          await AsyncStorage.setItem('@GlucoseTracker:auth_uid', this.state.auth_uid);
-          await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
-          await AsyncStorage.setItem('@GlucoseTracker:password', this.state.password);
+          // User provided was not admin, could be doctor?
+          if(this.state.user_type === null){
+            let doctors = firebase.firestore().collection('doctors');
+            await doctors.where('auth_id', '==', this.state.auth_uid).get()
+              .then(snapshot => {
+                var doctor_attrs = []
+                snapshot.forEach(doc => {
+                  doctor_attrs.push(doc.id);
+                });
+                console.log('doc attrs:', doctor_attrs);
 
-          console.log("Logged In!", this.state.user_uid);
-          console.log("Logged In!", this.state.auth_uid);
-          console.log("Logged In!", this.state.email);
-          console.log("Logged In!", this.state.password);
+                // When the user provided is a doctor
+                this.setState({ user_type: 'doctor' });
+                this.setState({ user_uid: doctor_attrs[0] });
+              });
+          }
 
-          this.props.on_handle_logged_in(true);
+          console.log('state: ', this.state.user_type);
+          console.log('uid: ', this.state.user_uid);
+
+          // User was not admin or doctor
+          if(this.state.user_type === null) {
+            this.setState({ error: true });
+            this.setState({ errorMessage: "Provided user is not an admin or doctor." });
+          } else { // Otherwise, login!
+            console.log(this.state.user_uid);
+
+            await AsyncStorage.setItem('@GlucoseTracker:user_type', this.state.user_type);
+            await AsyncStorage.setItem('@GlucoseTracker:user_uid', this.state.user_uid);
+            await AsyncStorage.setItem('@GlucoseTracker:auth_uid', this.state.auth_uid);
+            await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
+            await AsyncStorage.setItem('@GlucoseTracker:password', this.state.password);
+
+            // console.log("Logged In!", this.state.user_uid);
+            // console.log("Logged In!", this.state.auth_uid);
+            // console.log("Logged In!", this.state.email);
+            // console.log("Logged In!", this.state.password);
+
+            this.props.on_handle_logged_in(true);
+          }
       } catch (error) {
           console.log(error);
 

@@ -9,12 +9,18 @@ export default class SettingsScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      errors: null,
+    }
   }
 
   // Logout
   async handleLogOut() {
     try {
+      await AsyncStorage.removeItem('@GlucoseTracker:user_type');
       await AsyncStorage.removeItem('@GlucoseTracker:auth_uid');
+      await AsyncStorage.removeItem('@GlucoseTracker:user_uid');
       await AsyncStorage.removeItem('@GlucoseTracker:email');
       await AsyncStorage.removeItem('@GlucoseTracker:password');
 
