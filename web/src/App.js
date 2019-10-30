@@ -9,6 +9,7 @@ import './stylesheets/Main.css';
 // import * as firebase from "firebase";
 
 import LoginScreen from './LoginScreen';
+import SignUpScreen from './SignUpScreen.js';
 
 export class NotLoggedIn extends React.Component {
 
@@ -41,11 +42,18 @@ export class NotLoggedIn extends React.Component {
     );
   }
 
+  handle_current_page = (page) => {
+    console.log(page);
+    this.setState({current_page: page});
+    this.page_content();
+  }
+
   page_content(props) {
+    console.log(this.state.current_page);
     if(this.state.current_page === 'login') {
-      return (<LoginScreen />);
+      return (<LoginScreen on_handle_current_page={this.handle_current_page} />);
     } else if(this.state.current_page === 'signup') {
-      return (<LoginScreen />); // change to signup
+      return (<SignUpScreen on_handle_current_page={this.handle_current_page} />); // change to signup
     }
   }
 

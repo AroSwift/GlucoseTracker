@@ -41,7 +41,8 @@ export default class LoginScreen extends React.Component {
         console.log("Already logged in", user_uid);
 
         // Navigate to the Home page
-        return this.props.navigation.replace('MainTemplate', { user_uid: user_uid });
+        // return this.props.navigation.replace('MainTemplate', { user_uid: user_uid });
+        // return (<SignUpScreen>);
       }
     } catch(error) {
       console.log("Not already logged in");
@@ -91,7 +92,7 @@ export default class LoginScreen extends React.Component {
           });
       }
   }
-
+  
   render() {
     return (
       <PaperProvider>
@@ -124,7 +125,7 @@ export default class LoginScreen extends React.Component {
           </Button>
           <div className="smallBreakAfter"></div>
           <Button mode="contained"
-             onPress={() => this.props.navigation.navigate('SignUp')}>
+             onPress={() => this.props.on_handle_current_page('signup')}>
                 Need an account? Sign Up.
           </Button>
         </Surface>

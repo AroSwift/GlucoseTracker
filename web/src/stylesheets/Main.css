@@ -31,3 +31,22 @@
   font-size: 22px;
   font-weight: bold;
 }
+
+
+/* -- Sign Up specific */
+.signUpContainer {
+  padding: 50px;
+  position: 'absolute';
+  top: '25%';
+  left: 0;
+  right: 0;
+  background-color: 'rgba(52, 52, 52, 0)';
+}
+
+.signUpHeader {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
+}
