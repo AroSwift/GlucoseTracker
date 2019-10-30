@@ -28,12 +28,12 @@ export class NotLoggedIn extends React.Component {
           <Appbar.Content
             title="Glucose Tracker"
           />
-          <Button mode="text" onPress={() => console.log('login')} color="white">
+          <Button mode="text" onPress={() => this.setState({ current_page: 'login'})} color="white">
             <FiLogIn className="icon"/>
             Login
           </Button>
 
-          <Button mode="text" onPress={() => console.log('signup')} color="white">
+          <Button mode="text" onPress={() => this.setState({ current_page: 'signup'})} color="white">
             <FiCheckSquare className="icon"/>
             Sign Up
           </Button>
