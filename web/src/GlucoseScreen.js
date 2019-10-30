@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { View } from 'react-native';
 import {
-  Button, Colors, IconButton, TextInput, Text, Surface, Provider as PaperProvider
+  Button, TextInput, Text, Surface, Provider as PaperProvider
 } from 'react-native-paper';
 import { InputLabel, Select, MenuItem } from '@material-ui/core';
 import './stylesheets/Main.css';
@@ -43,11 +42,11 @@ export default class GlucoseScreen extends React.Component {
       <PaperProvider>
         <Surface className="glucoseContainer">
 
-        <Text className="glucoseHeader">Add Glucose</Text>
-        { this.state.errorMessage != null &&
-          <Text>{this.state.errorMessage}</Text>
-        }
-        <div className="smallBreakAfter"></div>
+          <Text className="glucoseHeader">Add Glucose</Text>
+          { this.state.errorMessage != null &&
+            <Text>{this.state.errorMessage}</Text>
+          }
+          <div className="smallBreakAfter"></div>
 
           <InputLabel id="label">Before / After</InputLabel>
           <Select labelId="label" id="select" value="Before">
@@ -64,7 +63,6 @@ export default class GlucoseScreen extends React.Component {
           </Select>
           <div className="breakAfter"></div>
 
-          <View></View>
           <TextInput
             label='Blood Glucose Level'
             autoCapitalize="none"
@@ -78,11 +76,6 @@ export default class GlucoseScreen extends React.Component {
             Submit
           </Button>
         </Surface>
-        <IconButton
-                color={Colors.white}
-                size={60}
-                onPress={() => this.handleAdd()}>
-        </IconButton>
       </PaperProvider>
     );
   }
