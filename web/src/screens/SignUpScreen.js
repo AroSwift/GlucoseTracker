@@ -3,10 +3,10 @@ import * as React from 'react';
 import {
   Button, TextInput, Text, Surface, Provider as PaperProvider
 } from 'react-native-paper';
-import './stylesheets/Main.css';
+import '../stylesheets/Main.css';
 //import db from 'firebase';
 // import * as firebase from "firebase";
-import { firebase } from './config.js';
+import { firebase } from '../config.js';
 
 
 export default class SignUpScreen extends React.Component {

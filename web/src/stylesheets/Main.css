@@ -69,3 +69,13 @@
   font-size: 22px;
   font-weight: bold;
 }
+
+/* -- Settings specific -- */
+.settingsContainer {
+  padding: 20px;
+  position: 'absolute';
+  top: '0%';
+  left: 0;
+  right: 0;
+  background-color: 'rgba(52, 52, 52, 0)';
+}

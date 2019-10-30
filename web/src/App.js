@@ -10,9 +10,10 @@ import './stylesheets/Main.css';
 // import * as firebase from "firebase";
 // import { firebase } from './config.js';
 
-import LoginScreen from './LoginScreen';
-import SignUpScreen from './SignUpScreen.js';
-import GlucoseScreen from './GlucoseScreen.js';
+import LoginScreen from './screens/LoginScreen';
+import SignUpScreen from './screens/SignUpScreen.js';
+import GlucoseScreen from './screens/GlucoseScreen.js';
+import SettingsScreen from './screens/SettingsScreen.js';
 
 export class NotLoggedIn extends React.Component {
 
@@ -102,17 +103,17 @@ export class LoggedIn extends React.Component {
           <Appbar.Content
             title="Glucose Tracker"
           />
-          <Button mode="text" onPress={() => console.log('glucose')} color="white">
+          <Button mode="text" onPress={() => this.setState({ current_page: 'patients'})} color="white">
             <MdAccessible className="icon"/>
             Patients
           </Button>
 
-          <Button mode="text" onPress={() => console.log('nutrition')} color="white">
+          <Button mode="text" onPress={() => this.setState({ current_page: 'doctors'})} color="white">
             <MdAccessibility className="icon"/>
             Doctors
           </Button>
 
-          <Button mode="text" onPress={() => console.log('Settings')} color="white">
+          <Button mode="text" onPress={() => this.setState({ current_page: 'settings'})} color="white">
             <MdSettings className="icon"/>
             Settings
           </Button>
@@ -124,6 +125,8 @@ export class LoggedIn extends React.Component {
   page_content(props) {
     if(this.state.current_page === 'glucose') {
       return (<GlucoseScreen on_handle_current_page={this.handle_current_page} />);
+    } else if(this.state.current_page === 'settings') {
+      return (<SettingsScreen on_handle_current_page={this.handle_current_page} />);
     } else {
       this.setState({ current_page: 'glucose' });
       return (<GlucoseScreen on_handle_current_page={this.handle_current_page} />);

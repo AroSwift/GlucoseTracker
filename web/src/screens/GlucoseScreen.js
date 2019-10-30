@@ -3,10 +3,10 @@ import {
   Button, TextInput, Text, Surface, Provider as PaperProvider
 } from 'react-native-paper';
 import { InputLabel, Select, MenuItem } from '@material-ui/core';
-import './stylesheets/Main.css';
+import '../stylesheets/Main.css';
 //import db from 'firebase';
 // import * as firebase from "firebase";
-import { firebase } from './config.js';
+import { firebase } from '../config.js';
 
 // TODO: add date picker after blood glucose level
 export default class GlucoseScreen extends React.Component {
