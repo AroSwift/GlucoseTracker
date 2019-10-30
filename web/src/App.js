@@ -198,10 +198,10 @@ export default class App extends React.Component {
   }
 
   render() {
-      if(this.state.logged_in) {
-        return (<LoggedIn on_handle_logged_in={this.handle_logged_in} />);
-      } else {
-        return (<NotLoggedIn on_handle_logged_in={this.handle_logged_in} />);
-      }
+    if(this.state.logged_in) {
+      return (<LoggedIn on_handle_logged_in={this.handle_logged_in} />);
+    } else {
+      return (<NotLoggedIn on_handle_logged_in={this.handle_logged_in} />);
+    }
   }
 }

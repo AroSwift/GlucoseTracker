@@ -65,9 +65,11 @@ export default class LoginScreen extends React.Component {
                 });
                 console.log('doc attrs:', doctor_attrs);
 
-                // When the user provided is a doctor
-                this.setState({ user_type: 'doctor' });
-                this.setState({ user_uid: doctor_attrs[0] });
+                if(doctor_attrs[0] != null) {
+                  // When the user provided is a doctor
+                  this.setState({ user_type: 'doctor' });
+                  this.setState({ user_uid: doctor_attrs[0] });
+                }
               });
           }
 
