@@ -19,9 +19,9 @@ export default class LoginScreen extends React.Component {
           password: '',
           user_uid: null,
           auth_uid: null,
+          user_type: null,
           error: false,
           errorMessage: null,
-          user_type: null,
     };
   }
 
@@ -89,12 +89,10 @@ export default class LoginScreen extends React.Component {
             await AsyncStorage.setItem('@GlucoseTracker:email', this.state.email);
             await AsyncStorage.setItem('@GlucoseTracker:password', this.state.password);
 
-            // console.log("Logged In!", this.state.user_uid);
-            // console.log("Logged In!", this.state.auth_uid);
-            // console.log("Logged In!", this.state.email);
-            // console.log("Logged In!", this.state.password);
-
             this.props.on_handle_logged_in(true);
+            this.props.on_handle_user_uid(this.state.user_uid);
+            this.props.on_handle_auth_uid(this.state.auth_uid);
+            this.props.on_handle_user_type(this.state.user_type);
           }
       } catch (error) {
           console.log(error);
