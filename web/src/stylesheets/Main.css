@@ -52,8 +52,8 @@
 }
 
 
-/* -- Glucose specific -- */
-.glucoseContainer {
+/* -- Patient specific -- */
+.patientListContainer {
   padding: 20px;
   position: 'absolute';
   top: '0%';
@@ -62,7 +62,7 @@
   background-color: 'rgba(52, 52, 52, 0)';
 }
 
-.glucoseHeader {
+.patientListHeader {
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;

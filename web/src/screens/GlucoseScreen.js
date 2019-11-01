@@ -1,3 +1,5 @@
+// THIS IS NOW OLD CODE; NOT NEEDED. BUT: LEAVE HERE FOR EXAMPLES FOR DROPDOWN
+
 import * as React from 'react';
 import {
   Button, TextInput, Text, Surface, Provider as PaperProvider

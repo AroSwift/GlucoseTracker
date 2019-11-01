@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { AsyncStorage } from 'react-native';
 import './stylesheets/Main.css';
+// Get icons here: https://react-icons.netlify.com/#/icons/fa
 
 // Seperate header / context menus
 import NotLoggedIn from './components/NotLoggedIn.js';
