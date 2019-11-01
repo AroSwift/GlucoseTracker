@@ -1,6 +1,6 @@
 // Get all the necessary components from React
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, AsyncStorage } from 'react-native';
+import { FlatList, StyleSheet, AsyncStorage, SafeAreaView, Alert, View, TouchableOpacity } from 'react-native';
 import {
   Button, Colors, IconButton, TextInput, Text, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
@@ -33,9 +33,9 @@ export default class NutritionScreen extends Component {
     };
   }
 
-    async handleAdd() {
-
-    }
+  async mybuttonclick(description) {
+    Alert.alert(description)
+}
 
 
 
@@ -62,19 +62,44 @@ export default class NutritionScreen extends Component {
                               "Response Body -> " + JSON.stringify(responseJson)
                           )
 
+
+                          //  var dataSource = responseJson.service.map(function(item) {
+                          //   return {
+                          //     key: item.id,
+                          //     label: item.name
+                          //   };
+                          //
+                          // });
+                          //
+                          // console.log(dataSource);
                           this.setState({
                             isLoading: false,
-                            dataSource: responseJson,
-                          }, function(){
+                            dataSource: responseJson.foods,
+                          },function(){
                           });
 
 
+
+
               })
+
 
         }
         catch (error) { console.error(error)}
 
         }
+
+        async logDataSource()
+        {
+          console.log(' ')
+          console.log(' ')
+          console.log(' ')
+          console.log(' ')
+          console.log(JSON.stringify(this.state.dataSource[0]))
+          console.log(JSON.stringify(this.state.dataSource[1]))
+          console.log(JSON.stringify(this.state.dataSource[2]))
+        }
+
 
 
         async handleSpecificAPIRequest() {
@@ -146,44 +171,75 @@ return(
          Search
       </Button>
 
-      <TextInput
-        label='Enter Specific Food ID'
-        autoCapitalize="none"
-        value={this.state.specFoodID}
-        onChangeText={specFoodID => this.setState({ specFoodID })}
-        style={styles.breakAfter}
-        error={this.state.error}
-      />
-      <Button
-        title="Add Known Food"
-         mode="contained"
-         onPress={() => this.handleSpecificAPIRequest()}
-         style={styles.breakAfter}>
-         Add known food
-      </Button>
-
-
-
+<View>
       <FlatList
        data={this.state.dataSource}
        keyExtractor={(x, i) => i}
-       renderItem={({ item }) =>
+       renderItem={({ item }) => <View style={styles.list}>
 
-       <Text>
-          {item.foods.foodName}
-      </Text>}
-     />
+       <Text>Name : {item.description}</Text>
+       <Text>Age : {item.fdcId}</Text>
+       <TouchableOpacity onPress={() => alert('FAB clicked')} style={styles.fab}>
+          <Text style={styles.fabIcon}>+</Text>
+        </TouchableOpacity>
+
+        </View>}
+
+
+      />
+
+</View>
 
 
     </Surface>
-    <IconButton
-            style={styles.circularButton}
-            color={Colors.white}
-            icon={require('../../assets/plus.png')}
-            size={60}
-            onPress={() => this.handleAdd()}>
-    </IconButton>
+
   </PaperProvider>
 );
 }
 }
+
+
+
+// <TextInput
+//   label='Enter Specific Food ID'
+//   autoCapitalize="none"
+//   value={this.state.specFoodID}
+//   onChangeText={specFoodID => this.setState({ specFoodID })}
+//   style={styles.breakAfter}
+//   error={this.state.error}
+// />
+// <Button
+//   title="Add Known Food"
+//    mode="contained"
+//    onPress={() => this.handleSpecificAPIRequest()}
+//    style={styles.breakAfter}>
+//    Add known food
+// </Button>
+//
+// <Button
+//   title="Show Data Source"
+//    mode="contained"
+//    onPress={() => this.logDataSource()}
+//    style={styles.breakAfter}>
+//    Show Data Source
+// </Button>
+//
+//
+//
+// <FlatList
+//  data={this.state.dataSource}
+//  keyExtractor={(x, i) => i}
+//  renderItem={({ item }) =>
+//
+//  <Text>
+//     {item.fdcId}
+// </Text>}
+// />
+//
+// <IconButton
+//         style={styles.circularButton}
+//         color={Colors.white}
+//         icon={require('../../assets/plus.png')}
+//         size={60}
+//         onPress={() => this.handleAdd()}>
+// </IconButton>
