@@ -49,6 +49,20 @@ export default class ExerciseScreen extends Component {
       }, {
         value: 'Walking',
       }, {
+        value: 'Jumping Rope',
+      }, {
+        value: 'Rowing Machine',
+      }, {
+        value: 'Tennis'
+      }, {
+        value: 'Wii Sports',
+      }, {
+        value: 'Yoga',
+      }, {
+        value: 'Swimming',
+      }, {
+        value: 'Weightlifting',
+      }, {
         value: 'Eliptical',
       }];
 
