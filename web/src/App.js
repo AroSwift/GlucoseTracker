@@ -20,10 +20,6 @@ export default class App extends React.Component {
       auth_uid: null,
       user_type: null,
     };
-
-    if(!this.state.logged_in) {
-      this.handlePreviousLogin();
-    }
   }
 
   handle_logged_in = (logged_in_status) => {
@@ -48,6 +44,12 @@ export default class App extends React.Component {
     console.log('changing user type status in App');
     console.log(user_type);
     this.setState({user_type: user_type});
+  }
+
+  componentDidMount() {
+    if(!this.state.logged_in) {
+      this.handlePreviousLogin();
+    }
   }
 
   // Previously logged in
