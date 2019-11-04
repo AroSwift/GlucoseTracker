@@ -11,7 +11,7 @@ import { styles } from '../stylesheets/Main';
 import { firebase } from '../config';
 
 // TODO: add date picker after blood glucose level
-export default class GlucoseScreen extends Component {
+export default class AddGlucoseScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -56,6 +56,37 @@ export default class GlucoseScreen extends Component {
 
     return (
       <PaperProvider>
+        <Surface style={styles.contentContainer}>
+
+        <Text style={styles.generalHeader}>Add Glucose</Text>
+        { this.state.errorMessage != null &&
+          <Text style={styles.mainError}>{this.state.errorMessage}</Text>
+        }
+
+          <Dropdown
+            label='Before / After'
+            onChangeText={before_after => this.setState({ before_after })}
+            data={before_after_options}
+          />
+          <Dropdown
+            label='Breakfast / Lunch / Dinner'
+            onChangeText={meal => this.setState({ meal })}
+            data={meal_options}
+          />
+          <View style={styles.breakAfterDropdown}></View>
+          <TextInput
+            label='Blood Glucose Level'
+            autoCapitalize="none"
+            value={this.state.blood_glucose_level}
+            onChangeText={blood_glucose_level => this.setState({ blood_glucose_level })}
+            style={styles.breakAfter}
+            error={this.state.error}
+          />
+          <Button mode="contained"
+            onPress={() => this.handleAdd()}>
+            Submit
+          </Button>
+        </Surface>
         <IconButton
                 style={styles.circularButton}
                 color={Colors.white}

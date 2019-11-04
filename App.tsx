@@ -14,6 +14,7 @@ import MainTemplateScreen from './src/screens/templates/MainTemplateScreen';
 // Secondary-logged in screens
 import ExerciseScreen from './src/screens/ExerciseScreen';
 import GlucoseScreen from './src/screens/GlucoseScreen';
+import AddGlucoseScreen from './src/screens/AddGlucoseScreen';
 import NutritionScreen from './src/screens/NutritionScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 
@@ -24,6 +25,7 @@ const MainNavigator = createStackNavigator({
   MainTemplate: { screen: MainTemplateScreen },
   Exercise: { screen: ExerciseScreen },
   Glucose: { screen: GlucoseScreen },
+  Glucose: { screen: AddGlucoseScreen },
   Nutrition: { screen: NutritionScreen },
   Settings: { screen: SettingsScreen },
 });
