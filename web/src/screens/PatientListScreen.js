@@ -16,6 +16,7 @@ export default class GlucoseScreen extends React.Component {
     this.state = {
       patients_uids: [],
       patients_data: [],
+      values: [],
     };
   }
 
@@ -29,29 +30,42 @@ export default class GlucoseScreen extends React.Component {
     try {
       let doc_user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
 
-      let user_docs = firebase.firestore().collection('user_doctors');
-      await user_docs.where('doctor_id', '==', doc_user_uid).get()
-        .then(snapshot => {
-          var user_ids = []
-          snapshot.forEach(doc => {
-            user_ids.push(doc.data().user_id);
+      if(this.props.show_all === true) {
+
+        await firebase.firestore().collection('users').get()
+          .then(snapshot => {
+            var user_ids = []
+            snapshot.forEach(doc => {
+              user_ids.push(doc.data());
+            });
+
+            this.setState({ values: user_ids });
           });
 
-          // When the doctor has patients
-          if(user_ids.length > 0) {
-            this.setState({ patients_uids: user_ids });
-          }
-        });
+          return Promise.all(this.state.values);
+      } else { // When we should only show some of the users
+        let user_docs = firebase.firestore().collection('user_doctors');
+        await user_docs.where('doctor_id', '==', doc_user_uid).get()
+          .then(snapshot => {
+            var user_ids = []
+            snapshot.forEach(doc => {
+              user_ids.push(doc.data().user_id);
+            });
 
-        let values = await this.state.patients_uids.map(item => {
-          return firebase.firestore().collection('users').doc(item).get().then(doc => {
-            // console.log(doc.data());
-            return doc.data();
+            // When the doctor has patients
+            if(user_ids.length > 0) {
+              this.setState({ patients_uids: user_ids });
+            }
           });
-        });
 
-
-        return Promise.all(values);
+          let values = await this.state.patients_uids.map(item => {
+            return firebase.firestore().collection('users').doc(item).get().then(doc => {
+              // console.log(doc.data());
+              return doc.data();
+            });
+          });
+          return Promise.all(values);
+      }
     } catch (error) {
       console.log(error);
     }

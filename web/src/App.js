@@ -61,9 +61,6 @@ export default class App extends React.Component {
       var password = await AsyncStorage.getItem('@GlucoseTracker:password');
 
       if(auth_uid != null && email != null && password != null && user_uid != null) {
-        // await firebase.auth()
-        //   .signInWithEmailAndPassword(email, password);
-
         console.log("Already logged in", user_uid);
 
         this.setState({ logged_in: true });

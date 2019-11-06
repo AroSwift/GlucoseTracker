@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { MdAccessibility, MdAccessible, MdSettings } from "react-icons/md";
+import { FaRegAddressCard, FaPlusCircle, FaStethoscope } from "react-icons/fa";
+import { MdSettings } from "react-icons/md";
 import {
   Button, Appbar, Provider as PaperProvider
 } from 'react-native-paper';
@@ -8,7 +9,7 @@ import '../stylesheets/Main.css';
 // import { firebase } from './config.js';
 
 // Content screens
-import GlucoseScreen from '../screens/GlucoseScreen.js';
+import PatientListScreen from '../screens/PatientListScreen.js';
 import SettingsScreen from '../screens/SettingsScreen.js';
 
 export default class LoggedInAdmin extends React.Component {
@@ -42,14 +43,19 @@ export default class LoggedInAdmin extends React.Component {
           <Appbar.Content
             title="Glucose Tracker"
           />
-          <Button mode="text" onPress={() => this.setState({ current_page: 'patients'})} color="white">
-            <MdAccessible className="icon"/>
-            Patients
+          <Button mode="text" onPress={() => this.setState({ current_page: 'patient_list'})} color="white">
+            <FaRegAddressCard className="icon"/>
+            Patients List
           </Button>
 
           <Button mode="text" onPress={() => this.setState({ current_page: 'doctors'})} color="white">
-            <MdAccessibility className="icon"/>
+            <FaStethoscope className="icon"/>
             Doctors
+          </Button>
+
+          <Button mode="text" onPress={() => this.setState({ current_page: 'doctors'})} color="white">
+            <FaPlusCircle className="icon"/>
+            Add Doctor
           </Button>
 
           <Button mode="text" onPress={() => this.setState({ current_page: 'settings'})} color="white">
@@ -62,15 +68,21 @@ export default class LoggedInAdmin extends React.Component {
   }
 
   page_content(props) {
-    if(this.state.current_page === 'glucose') {
-      return (<GlucoseScreen on_handle_current_page={this.handle_current_page} />);
+    if(this.state.current_page === 'patient_list') {
+      return (<PatientListScreen
+        on_handle_current_page={this.handle_current_page}
+        show_all={true} />);
+    // } else if(this.state.current_page === 'patient_add') {
+    //     return (<DoctorAddScreen on_handle_current_page={this.handle_current_page} />);
     } else if(this.state.current_page === 'settings') {
       return (<SettingsScreen
         on_handle_logged_in={this.handle_logged_in}
         on_handle_current_page={this.handle_current_page} />);
     } else {
-      this.setState({ current_page: 'glucose' });
-      return (<GlucoseScreen on_handle_logged_in={this.handle_logged_in} />);
+      this.setState({ current_page: 'patient_list' });
+      return (<PatientListScreen
+        on_handle_logged_in={this.handle_logged_in}
+        show_all={true} />);
     }
   }
 
