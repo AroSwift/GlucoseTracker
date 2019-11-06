@@ -25,7 +25,7 @@ const MainNavigator = createStackNavigator({
   MainTemplate: { screen: MainTemplateScreen },
   Exercise: { screen: ExerciseScreen },
   Glucose: { screen: GlucoseScreen },
-  Glucose: { screen: AddGlucoseScreen },
+  AddGlucose: { screen: AddGlucoseScreen },
   Nutrition: { screen: NutritionScreen },
   Settings: { screen: SettingsScreen },
 });

@@ -10,6 +10,10 @@ import { styles } from '../stylesheets/Main';
 //import db from 'firebase';
 import { firebase } from '../config';
 
+import AddGlucoseScreen from './AddGlucoseScreen';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+
 // TODO: add date picker after blood glucose level
 export default class GlucoseScreen extends Component {
 
@@ -40,20 +44,6 @@ export default class GlucoseScreen extends Component {
   }
 
   render() {
-    let before_after_options = [{
-      value: 'Before',
-    }, {
-      value: 'After',
-    }];
-
-    let meal_options = [{
-      value: 'Breakfast',
-    }, {
-      value: 'Lunch',
-    }, {
-      value: 'Dinner',
-    }];
-
     return (
       <PaperProvider>
         <IconButton
@@ -61,7 +51,7 @@ export default class GlucoseScreen extends Component {
                 color={Colors.white}
                 icon={require('../../assets/plus.png')}
                 size={60}
-                onPress={() => this.handleAdd()}>
+                onPress={() => this.props.navigation.navigate('AddGlucose')}>
         </IconButton>
       </PaperProvider>
     );
