@@ -40,7 +40,6 @@ export default class GlucoseScreen extends Component {
       error: false,
       errorMessage: null
     };
-
   }
 
   async handleAdd() {
@@ -60,6 +59,7 @@ export default class GlucoseScreen extends Component {
 
   render() {
     return (
+      <PaperProvider>
       <ScrollView>
         <View style={styles.container}>
           <View>
@@ -363,6 +363,14 @@ export default class GlucoseScreen extends Component {
           </View>
         </View>
       </ScrollView>
+      <IconButton
+              style={styles.circularButton}
+              color={Colors.white}
+              icon={require('../../assets/plus.png')}
+              size={60}
+              onPress={() => this.handleAdd()}>
+      </IconButton>
+      </PaperProvider>
     );
   }
 }
