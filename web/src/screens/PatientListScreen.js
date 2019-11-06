@@ -8,28 +8,6 @@ import { DataTable } from 'react-native-paper';
 import '../stylesheets/Main.css';
 import { firebase } from '../config.js';
 
-export class DataTableRow extends React.Component {
-  render() {
-    try {
-      var table = [];
-
-      this.props.data.forEach(function myFunction(item) {
-        table.push(
-          <DataTable.Row>
-            <DataTable.Cell>{item.first_name}</DataTable.Cell>
-            <DataTable.Cell>{item.last_name}</DataTable.Cell>
-            <DataTable.Cell>{item.address}</DataTable.Cell>
-          </DataTable.Row>
-        );
-      });
-      return table;
-    } catch (err) {
-      return null;
-    }
-  }
-}
-
-// TODO: add date picker after blood glucose level
 export default class GlucoseScreen extends React.Component {
 
   constructor(props) {
@@ -41,49 +19,10 @@ export default class GlucoseScreen extends React.Component {
     };
   }
 
-  async componentDidMount() {
-
-
-
-
-
-    let doc_user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
-
-    let user_docs = firebase.firestore().collection('user_doctors');
-    user_docs.where('doctor_id', '==', doc_user_uid).get()
-      .then(snapshot => {
-        var user_ids = []
-        snapshot.forEach(doc => {
-          user_ids.push(doc.data().user_id);
-        });
-
-        // When the doctor has patients
-        if(user_ids.length > 0) {
-          this.setState({ patients_uids: user_ids });
-        }
-      });
-
-      console.log(this.state.patients_uids);
-
-      let fetched_patient_data = []
-      this.state.patients_uids.forEach(function myFunction(item) {
-        firebase.firestore().collection('users').doc(item).get().then(doc => {
-          console.log(doc.data());
-
-          fetched_patient_data.push(doc.data());
-        });
-      });
-
-
-
-
-
-
-
-
-
-    this.setState({ patients_data: this.set_patient_data() });
-    console.log('Mounted ', this.state.patients_data);
+  componentDidMount() {
+    this.set_patient_data().then(result =>
+      this.setState({ patients_data: result })
+    )
   }
 
   async set_patient_data() {
@@ -91,7 +30,7 @@ export default class GlucoseScreen extends React.Component {
       let doc_user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
 
       let user_docs = firebase.firestore().collection('user_doctors');
-      user_docs.where('doctor_id', '==', doc_user_uid).get()
+      await user_docs.where('doctor_id', '==', doc_user_uid).get()
         .then(snapshot => {
           var user_ids = []
           snapshot.forEach(doc => {
@@ -104,18 +43,38 @@ export default class GlucoseScreen extends React.Component {
           }
         });
 
-        let fetched_patient_data = []
-        this.state.patients_uids.forEach(function myFunction(item) {
-          firebase.firestore().collection('users').doc(item).get().then(doc => {
-            console.log(doc.data());
-
-            fetched_patient_data.push(doc.data());
+        let values = await this.state.patients_uids.map(item => {
+          return firebase.firestore().collection('users').doc(item).get().then(doc => {
+            // console.log(doc.data());
+            return doc.data();
           });
         });
 
-        return fetched_patient_data;
+
+        return Promise.all(values);
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  render_table() {
+    try {
+
+      console.log('RENDER_TABLE ', this.state.patients_data);
+
+      return this.state.patients_data.map((item, index) => {
+        console.log(item);
+
+        return (
+          <DataTable.Row key={index}>
+            <DataTable.Cell>{item.first_name}</DataTable.Cell>
+            <DataTable.Cell>{item.last_name}</DataTable.Cell>
+            <DataTable.Cell>{item.auth_uid}</DataTable.Cell>
+          </DataTable.Row>
+        );
+      });
+    } catch (err) {
+      return null;
     }
   }
 
@@ -129,10 +88,10 @@ export default class GlucoseScreen extends React.Component {
             <DataTable.Header>
               <DataTable.Title>First Name</DataTable.Title>
               <DataTable.Title>Last Name</DataTable.Title>
-              <DataTable.Title>Address</DataTable.Title>
+              <DataTable.Title>Auth UID</DataTable.Title>
             </DataTable.Header>
 
-            <DataTableRow data={this.state.patients_data} />
+            {this.render_table()}
 
             <DataTable.Pagination
               page={1}
