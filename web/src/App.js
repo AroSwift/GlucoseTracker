@@ -57,6 +57,7 @@ export default class App extends React.Component {
     try {
       var user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
       var auth_uid = await AsyncStorage.getItem('@GlucoseTracker:auth_uid');
+      var user_type = await AsyncStorage.getItem('@GlucoseTracker:user_type');
       var email = await AsyncStorage.getItem('@GlucoseTracker:email');
       var password = await AsyncStorage.getItem('@GlucoseTracker:password');
 
@@ -64,6 +65,9 @@ export default class App extends React.Component {
         console.log("Already logged in", user_uid);
 
         this.setState({ logged_in: true });
+        this.setState({ user_uid: user_uid });
+        this.setState({ auth_uid: auth_uid });
+        this.setState({ user_type: user_type });
         this.render();
       }
     } catch(error) {
