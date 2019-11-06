@@ -33,16 +33,11 @@ export default class NutritionScreen extends Component {
     };
   }
 
-  async mybuttonclick(description) {
-    Alert.alert(description)
-}
 
 
 
     async handleGeneralAPIRequest() {
         //Uses search data to call from food API
-
-
         try {
 
               const response = await fetch( 'https://api.nal.usda.gov/fdc/v1/search?api_key=yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1',  {
@@ -62,28 +57,12 @@ export default class NutritionScreen extends Component {
                               "Response Body -> " + JSON.stringify(responseJson)
                           )
 
-
-                          //  var dataSource = responseJson.service.map(function(item) {
-                          //   return {
-                          //     key: item.id,
-                          //     label: item.name
-                          //   };
-                          //
-                          // });
-                          //
-                          // console.log(dataSource);
                           this.setState({
                             isLoading: false,
                             dataSource: responseJson.foods,
                           },function(){
                           });
-
-
-
-
               })
-
-
         }
         catch (error) { console.error(error)}
 
@@ -101,11 +80,21 @@ export default class NutritionScreen extends Component {
         }
 
 
+        async setIdAndSearch(searchedFoodID)
+        {
+          this.setSpecificID(searchedFoodID);
+          this.handleSpecificAPIRequest();
+        }
+
+
+        async setSpecificID(goodFoodID)
+        {
+          this.setState({ specFoodID: goodFoodID });
+        }
+
 
         async handleSpecificAPIRequest() {
             //Uses search data to call from food API
-
-
             try {
 
                   const response = await fetch('https://api.nal.usda.gov/fdc/v1/' + this.state.specFoodID + '?api_key=yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1')
@@ -124,6 +113,7 @@ export default class NutritionScreen extends Component {
                                   specDataSource: responseData,
                                 }, function(){
                                 });
+                              this.addFoodToDatabase();
                   })
 
             }
@@ -131,6 +121,11 @@ export default class NutritionScreen extends Component {
 
             }
 
+async addFoodToDatabase()
+{
+    //  var calories = this.state.specDataSource[0];
+
+}
 
 
 
@@ -179,7 +174,9 @@ return(
 
        <Text>Name : {item.description}</Text>
        <Text>Age : {item.fdcId}</Text>
-       <TouchableOpacity onPress={() => alert('FAB clicked')} style={styles.fab}>
+       <TouchableOpacity onPress={() => {
+         this.setIdAndSearch(item.fdcId)
+       }} style ={styles.fab}>
           <Text style={styles.fabIcon}>+</Text>
         </TouchableOpacity>
 
