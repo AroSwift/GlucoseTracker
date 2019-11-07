@@ -10,6 +10,7 @@ import '../stylesheets/Main.css';
 
 // Content screens
 import PatientListScreen from '../screens/PatientListScreen.js';
+import DoctorListScreen from '../screens/DoctorListScreen.js';
 import SettingsScreen from '../screens/SettingsScreen.js';
 
 export default class LoggedInAdmin extends React.Component {
@@ -48,12 +49,12 @@ export default class LoggedInAdmin extends React.Component {
             Patients List
           </Button>
 
-          <Button mode="text" onPress={() => this.setState({ current_page: 'doctors'})} color="white">
+          <Button mode="text" onPress={() => this.setState({ current_page: 'doctor_list'})} color="white">
             <FaStethoscope className="icon"/>
             Doctors
           </Button>
 
-          <Button mode="text" onPress={() => this.setState({ current_page: 'doctors'})} color="white">
+          <Button mode="text" onPress={() => this.setState({ current_page: 'doctor_add'})} color="white">
             <FaPlusCircle className="icon"/>
             Add Doctor
           </Button>
@@ -72,8 +73,8 @@ export default class LoggedInAdmin extends React.Component {
       return (<PatientListScreen
         on_handle_current_page={this.handle_current_page}
         show_all={true} />);
-    // } else if(this.state.current_page === 'patient_add') {
-    //     return (<DoctorAddScreen on_handle_current_page={this.handle_current_page} />);
+    } else if(this.state.current_page === 'doctor_list') {
+        return (<DoctorListScreen on_handle_current_page={this.handle_current_page} />);
     } else if(this.state.current_page === 'settings') {
       return (<SettingsScreen
         on_handle_logged_in={this.handle_logged_in}

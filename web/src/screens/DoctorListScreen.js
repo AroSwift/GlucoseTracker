@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   Text, Surface, Provider as PaperProvider
 } from 'react-native-paper';
-import { AsyncStorage } from 'react-native';
 import { DataTable } from 'react-native-paper';
 
 import '../stylesheets/Main.css';
@@ -28,44 +27,17 @@ export default class PatientListScreen extends React.Component {
 
   async set_patient_data() {
     try {
-      let doc_user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
-
-      if(this.props.show_all === true) {
-
-        await firebase.firestore().collection('users').get()
-          .then(snapshot => {
-            var user_ids = []
-            snapshot.forEach(doc => {
-              user_ids.push(doc.data());
-            });
-
-            this.setState({ values: user_ids });
+      await firebase.firestore().collection('doctors').get()
+        .then(snapshot => {
+          var user_ids = []
+          snapshot.forEach(doc => {
+            user_ids.push(doc.data());
           });
 
-          return Promise.all(this.state.values);
-      } else { // When we should only show some of the users
-        let user_docs = firebase.firestore().collection('user_doctors');
-        await user_docs.where('doctor_id', '==', doc_user_uid).get()
-          .then(snapshot => {
-            var user_ids = []
-            snapshot.forEach(doc => {
-              user_ids.push(doc.data().user_id);
-            });
+          this.setState({ values: user_ids });
+        });
 
-            // When the doctor has patients
-            if(user_ids.length > 0) {
-              this.setState({ patients_uids: user_ids });
-            }
-          });
-
-          let values = await this.state.patients_uids.map(item => {
-            return firebase.firestore().collection('users').doc(item).get().then(doc => {
-              // console.log(doc.data());
-              return doc.data();
-            });
-          });
-          return Promise.all(values);
-      }
+        return Promise.all(this.state.values);
     } catch (error) {
       console.log(error);
     }
@@ -96,7 +68,7 @@ export default class PatientListScreen extends React.Component {
     return (
       <PaperProvider>
         <Surface className="patientListContainer">
-          <Text className="patientListHeader">Patients List</Text>
+          <Text className="patientListHeader">Doctors List</Text>
 
           <DataTable>
             <DataTable.Header>
@@ -106,13 +78,14 @@ export default class PatientListScreen extends React.Component {
             </DataTable.Header>
 
             {this.render_table()}
-
+            
           </DataTable>
         </Surface>
       </PaperProvider>
     );
   }
 }
+
 
 // If we want to implement pagination later:
 // <DataTable.Pagination
