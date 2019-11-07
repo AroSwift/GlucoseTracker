@@ -16,6 +16,8 @@ export default class SignUpScreen extends React.Component {
     this.state = {
           email: '',
           password: '',
+          first_name: '',
+          last_name: '',
           errorMessage: null
     };
   }
@@ -42,6 +44,23 @@ render() {
             <Text style={{ color: 'red' }}>
               {this.state.errorMessage}
             </Text>}
+
+          <TextInput
+            label='First Name'
+            autoCapitalize="none"
+            value={this.state.first_name}
+            onChangeText={first_name => this.setState({ first_name })}
+            error={this.state.error}
+          />
+          <div className="breakAfter"></div>
+          <TextInput
+            label='Last Name'
+            autoCapitalize="none"
+            value={this.state.last_name}
+            onChangeText={last_name => this.setState({ last_name })}
+            error={this.state.error}
+          />
+          <div className="breakAfter"></div>
           <TextInput
             placeholder="Email"
             autoCapitalize="none"
