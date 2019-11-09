@@ -14,19 +14,21 @@ import { styles } from '../stylesheets/Main';
 import { firebase } from '../config';
 const screenWidth = Dimensions.get("window").width;
 
-// const data = {
-//   labels: ["Swim", "Bike", "Run"],
-//   data: [0.4, 0.6, 0.8]
-// };
+const meal_chart_data = {
+  data: [],
+  labels: ['Breakfast','Lunch','Dinner']
+};
 
-const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-  datasets: [{
-    data: [ 20, 45, 28, 80, 99, 43 ],
-    color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
-    strokeWidth: 2 // optional
-  }]
-}
+// const data = {
+//   labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+//   datasets: [{
+//     data: [ 20, 45, 28, 80, 99, 43 ],
+//     color: (opacity = 1) => `rgba(134, 65, 244, ${opacity})`, // optional
+//     strokeWidth: 2 // optional
+//   }]
+// }
+
+
 
 // TODO: add date picker after blood glucose level
 export default class GlucoseScreen extends Component {
@@ -80,7 +82,7 @@ export default class GlucoseScreen extends Component {
           this.state.meal_data.push(Math.round((lunchArray.reduce((a, b) => a + b, 0))/lunchArray.length)/100);
           this.state.meal_data.push(Math.round((dinnerArray.reduce((a, b) => a + b, 0))/dinnerArray.length)/100);
 
-          console.log(this.state.meal_data);
+          meal_chart_data.data = this.state.meal_data;
         });
     } catch (err) {
       console.log(err);
@@ -103,15 +105,15 @@ export default class GlucoseScreen extends Component {
                   padding: 16,
                   marginTop: 16,
                 }}>
-                Meal Blood Glocose
+                Meal Blood Glocose Levels History
               </Text>
               <ProgressChart
-                data={this.state.meal_data}
+                data={meal_chart_data}
                 width={Dimensions.get('window').width - 16}
                 height={220}
                 chartConfig={{
-                  backgroundColor: '#1cc910',
-                  backgroundGradientFrom: '#eff3ff',
+                  backgroundColor: '#e26a00',
+                  backgroundGradientFrom: '#0b8583',
                   backgroundGradientTo: '#efefef',
                   decimalPlaces: 2,
                   color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
@@ -124,47 +126,50 @@ export default class GlucoseScreen extends Component {
                   borderRadius: 16,
                 }}
               />
-          {/*Example of LineChart*/}
-              <Text
-                style={{
-                  textAlign: 'center',
-                  fontSize: 18,
-                  padding: 16,
-                  marginTop: 16,
-                }}>
-                Glocose Series
-              </Text>
-              <LineChart
-                data={{
-                  labels: [
-                    'Breakfast',
-                    'Lunch',
-                    'Dinner',
-                  ],
-                  datasets: [
-                    {
-                      data: [20, 45, 28, 80, 99, 43],
-                      strokeWidth: 2,
+                {/*Example of Bar Chart*/}
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontSize: 18,
+                    padding: 16,
+                    marginTop: 16,
+                  }}>
+                  Bar Chart
+                </Text>
+                <BarChart
+                  data={{
+                    labels: [
+                      'January',
+                      'February',
+                      'March',
+                      'April',
+                      'May',
+                      'June',
+                    ],
+                    datasets: [
+                      {
+                        data: [20, 45, 28, 80, 99, 43],
+                      },
+                    ],
+                  }}
+                  width={Dimensions.get('window').width - 16}
+                  height={220}
+                  yAxisLabel={'$'}
+                  chartConfig={{
+                    backgroundColor: '#1cc910',
+                    backgroundGradientFrom: '#eff3ff',
+                    backgroundGradientTo: '#efefef',
+                    decimalPlaces: 2,
+                    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                    style: {
+                      borderRadius: 16,
                     },
-                  ],
-                }}
-                width={Dimensions.get('window').width - 16}
-                height={220}
-                chartConfig={{
-                  backgroundColor: '#1cc910',
-                  backgroundGradientFrom: '#eff3ff',
-                  backgroundGradientTo: '#efefef',
-                  decimalPlaces: 2,
-                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-                  style: {
+                  }}
+                  style={{
+                    marginVertical: 8,
                     borderRadius: 16,
-                  },
-                }}
-                style={{
-                  marginVertical: 8,
-                  borderRadius: 16,
-                }}
-              />
+                  }}
+                />
           </View>
         </View>
       </ScrollView>
@@ -504,3 +509,89 @@ export default class GlucoseScreen extends Component {
 //       size={60}
 //       onPress={() => this.props.navigation.navigate('Login')}>
 // </IconButton>
+
+// {/*Example of LineChart*/}
+//     <Text
+//       style={{
+//         textAlign: 'center',
+//         fontSize: 18,
+//         padding: 16,
+//         marginTop: 16,
+//       }}>
+//       Glocose Series Chart
+//     </Text>
+//     <LineChart
+//       data={{
+//         labels: [
+//           'Breakfast',
+//           'Lunch',
+//           'Dinner',
+//         ],
+//         datasets: [
+//           {
+//             data: [20, 45, 28, 80, 99, 43],
+//             strokeWidth: 2,
+//           },
+//         ],
+//       }}
+//       width={Dimensions.get('window').width - 16}
+//       height={220}
+//       chartConfig={{
+//         backgroundColor: '#1cc910',
+//         backgroundGradientFrom: '#eff3ff',
+//         backgroundGradientTo: '#efefef',
+//         decimalPlaces: 2,
+//         color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+//         style: {
+//           borderRadius: 16,
+//         },
+//       }}
+//       style={{
+//         marginVertical: 8,
+//         borderRadius: 16,
+//       }}
+//     />
+//     {/*Example of LineChart*/}
+//       <Text
+//         style={{
+//           textAlign: 'center',
+//           fontSize: 18,
+//           padding: 16,
+//           marginTop: 16,
+//         }}>
+//         Line Chart
+//       </Text>
+//       <LineChart
+//         data={{
+//           labels: [
+//             'January',
+//             'February',
+//             'March',
+//             'April',
+//             'May',
+//             'June',
+//           ],
+//           datasets: [
+//             {
+//               data: [20, 45, 28, 80, 99, 43],
+//               strokeWidth: 2,
+//             },
+//           ],
+//         }}
+//         width={Dimensions.get('window').width - 16}
+//         height={220}
+//         chartConfig={{
+//           backgroundColor: '#1cc910',
+//           backgroundGradientFrom: '#eff3ff',
+//           backgroundGradientTo: '#efefef',
+//           decimalPlaces: 2,
+//           color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+//           style: {
+//             borderRadius: 16,
+//           },
+//         }}
+//         style={{
+//           marginVertical: 8,
+//           borderRadius: 16,
+//         }}
+//       />
