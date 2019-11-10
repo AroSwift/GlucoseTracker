@@ -32,7 +32,6 @@ export default class NutritionScreen extends Component {
           dataSource:[],
           specDataSource:[],
           foodNutrients:[],
-          finalNutrients:[]
     };
   }
 

@@ -19,6 +19,7 @@ export default class AddGlucoseScreen extends Component {
       before_after: '',
       meal: '',
       blood_glucose_level: '',
+      blood_glucose_unit: '',
       error: false,
       errorMessage: null
     };
@@ -26,6 +27,13 @@ export default class AddGlucoseScreen extends Component {
 
   async handleAdd() {
     try {
+      if (this.state.blood_glucose_unit == 'mmol/L')
+      {
+          this.setState( {blood_glucose_level: this.state.blood_glucose_level*18});
+
+      }
+
+
       let exercise = firebase.firestore().collection('glucose').doc(); //.doc(this.make_id(20));
       exercise.set({
           before_after: this.state.before_after,
@@ -54,6 +62,14 @@ export default class AddGlucoseScreen extends Component {
       value: 'Dinner',
     }];
 
+    let glucose_units = [{
+      value: 'mmol/L',
+    }, {
+      value: 'mg/dL',
+    }];
+
+
+
     return (
       <PaperProvider>
         <Surface style={styles.contentContainer}>
@@ -72,6 +88,11 @@ export default class AddGlucoseScreen extends Component {
             label='Breakfast / Lunch / Dinner'
             onChangeText={meal => this.setState({ meal })}
             data={meal_options}
+          />
+          <Dropdown
+            label='Glucose Unit'
+            onChangeText={blood_glucose_unit => this.setState({ blood_glucose_unit })}
+            data={glucose_units}
           />
           <View style={styles.breakAfterDropdown}></View>
           <TextInput
