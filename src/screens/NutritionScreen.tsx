@@ -1,6 +1,6 @@
 // Get all the necessary components from React
 import React, { Component } from 'react';
-import { FlatList, StyleSheet, AsyncStorage, SafeAreaView, Alert, View, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, AsyncStorage, SafeAreaView, Alert, View, TouchableOpacity, ScrollView } from 'react-native';
 import {
   Button, Colors, IconButton, TextInput, Text, Surface, Card, Provider as PaperProvider
 } from 'react-native-paper';
@@ -23,21 +23,23 @@ export default class NutritionScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
+          meal : '',
           foodName: '',
           specFoodID: '',
           error: false,
           errorMessage: null,
           loading: true,
           dataSource:[],
-          specDataSource:[]
+          specDataSource:[],
+          foodNutrients:[],
+          finalNutrients:[]
     };
   }
 
 
-
-
-    async handleGeneralAPIRequest() {
-        //Uses search data to call from food API
+    async handleGeneralAPIRequest()
+    {
+        //user input used to search through FDC API
         try {
 
               const response = await fetch( 'https://api.nal.usda.gov/fdc/v1/search?api_key=yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1',  {
@@ -52,11 +54,6 @@ export default class NutritionScreen extends Component {
               })
                .then((response) => response.json() )
                 .then((responseJson) => {
-                          console.log(
-                              "POST Response",
-                              "Response Body -> " + JSON.stringify(responseJson)
-                          )
-
                           this.setState({
                             isLoading: false,
                             dataSource: responseJson.foods,
@@ -66,39 +63,30 @@ export default class NutritionScreen extends Component {
         }
         catch (error) { console.error(error)}
 
-        }
-
-        async logDataSource()
-        {
-          console.log(' ')
-          console.log(' ')
-          console.log(' ')
-          console.log(' ')
-          console.log(JSON.stringify(this.state.dataSource[0]))
-          console.log(JSON.stringify(this.state.dataSource[1]))
-          console.log(JSON.stringify(this.state.dataSource[2]))
-        }
+      }
 
 
+        //calls a set for the specific food ID and calls the API search for one food
         async setIdAndSearch(searchedFoodID)
         {
-          this.setSpecificID(searchedFoodID);
+          await this.setSpecificID(searchedFoodID);
           this.handleSpecificAPIRequest();
         }
 
 
+        //sets the food ID based on flatlist search
         async setSpecificID(goodFoodID)
         {
           this.setState({ specFoodID: goodFoodID });
         }
 
 
+
+        //Uses specific ID to get data from FDC API on a specific food
         async handleSpecificAPIRequest() {
-            //Uses search data to call from food API
             try {
 
                   const response = await fetch('https://api.nal.usda.gov/fdc/v1/' + this.state.specFoodID + '?api_key=yBTV1ueQfiTbtlcJrpStrLNFEoF5AHdkjMmb9cZ1')
-
                    .then(
                       (response) => response.json()
                   )
@@ -113,7 +101,8 @@ export default class NutritionScreen extends Component {
                                   specDataSource: responseData,
                                 }, function(){
                                 });
-                              this.addFoodToDatabase();
+                                this.setState({foodNutrients : this.state.specDataSource["foodNutrients"]})
+                                this.addFoodToDatabase();
                   })
 
             }
@@ -121,15 +110,71 @@ export default class NutritionScreen extends Component {
 
             }
 
+//Pulls data from specific food and assigns it to variables. Adds that data to DB
 async addFoodToDatabase()
 {
-    //  var calories = this.state.specDataSource[0];
 
-}
+  var protein;
+  var carbohydrate;
+  var fat;
+  var calorie;
+  for ( const nutr of this.state.foodNutrients) {
+
+    switch(nutr.nutrient.name) {
+
+         case 'Protein':
+
+            protein = nutr.nutrient.number + nutr.nutrient.unitName;
+           console.log(nutr.id + '\t ' + nutr.nutrient.name + '\t ' + nutr.nutrient.number + '\t ' + nutr.nutrient.unitName);
+           break;
+
+         case 'Carbohydrate, by difference':
+          carbohydrate = nutr.nutrient.number + nutr.nutrient.unitName;
+           console.log(nutr.id + '\t ' + nutr.nutrient.name + '\t ' + nutr.nutrient.number + '\t ' + nutr.nutrient.unitName);
+           break;
+
+         case 'Total lipid (fat)':
+         fat = nutr.nutrient.number + nutr.nutrient.unitName;
+           console.log(nutr.id + '\t ' + nutr.nutrient.name + '\t ' + nutr.nutrient.number + '\t ' + nutr.nutrient.unitName);
+           break;
+
+         case 'Energy':
+         calorie = nutr.nutrient.number + nutr.nutrient.unitName;
+            console.log(nutr.id + '\t ' + nutr.nutrient.name + '\t ' + nutr.nutrient.number + '\t ' + nutr.nutrient.unitName);
+           break;
+
+         default:
+          //do nothing
+
+         };
+
+     }
 
 
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1; //Current Month
+      var year = new Date().getFullYear();
+      var user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
 
 
+    try {
+
+      let nutrition = firebase.firestore().collection('meal').doc(); //.doc(this.make_id(20));
+      nutrition.set({
+          type: this.state.meal,
+          foodName: this.state.specDataSource.description,
+          proteins: protein,
+          carbohydrates: carbohydrate,
+          fats: fat,
+          calories: calorie,
+          user_id: user_uid,
+          day: date,
+          month: month,
+          year: year
+      });
+
+    }
+    catch(err) { console.log(err)} }
 
 
 render(){
@@ -138,7 +183,7 @@ render(){
 return(
 
   <PaperProvider>
-    <Surface style={styles.contentContainer}>
+    <Surface style={styles.container}>
 
       <Text style={styles.generalHeader}>Add Food</Text>
       { this.state.errorMessage != null &&
@@ -166,77 +211,38 @@ return(
          Search
       </Button>
 
-<View>
-      <FlatList
-       data={this.state.dataSource}
-       keyExtractor={(x, i) => i}
-       renderItem={({ item }) => <View style={styles.list}>
+</Surface>
 
-       <Text>Name : {item.description}</Text>
-       <Text>Age : {item.fdcId}</Text>
-       <TouchableOpacity onPress={() => {
-         this.setIdAndSearch(item.fdcId)
-       }} style ={styles.fab}>
-          <Text style={styles.fabIcon}>+</Text>
-        </TouchableOpacity>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.container}>
 
-        </View>}
+              <FlatList
+               data={this.state.dataSource}
+               keyExtractor={(x, i) => i}
+               renderItem={({ item }) => <View style={styles.list}>
+
+               <Text>Name : {item.description}</Text>
+               <Text>fdcID : {item.fdcId}</Text>
+               <TouchableOpacity onPress={() => {
+                 this.setIdAndSearch(item.fdcId)
+               }} style ={styles.fab}>
+                  <Text style={styles.fabIcon}>+</Text>
+                </TouchableOpacity>
+
+                </View>}
 
 
-      />
-
-</View>
+              />
 
 
-    </Surface>
 
-  </PaperProvider>
+
+          </View>
+        </View>
+      </ScrollView>
+
+</PaperProvider>
 );
 }
 }
-
-
-
-// <TextInput
-//   label='Enter Specific Food ID'
-//   autoCapitalize="none"
-//   value={this.state.specFoodID}
-//   onChangeText={specFoodID => this.setState({ specFoodID })}
-//   style={styles.breakAfter}
-//   error={this.state.error}
-// />
-// <Button
-//   title="Add Known Food"
-//    mode="contained"
-//    onPress={() => this.handleSpecificAPIRequest()}
-//    style={styles.breakAfter}>
-//    Add known food
-// </Button>
-//
-// <Button
-//   title="Show Data Source"
-//    mode="contained"
-//    onPress={() => this.logDataSource()}
-//    style={styles.breakAfter}>
-//    Show Data Source
-// </Button>
-//
-//
-//
-// <FlatList
-//  data={this.state.dataSource}
-//  keyExtractor={(x, i) => i}
-//  renderItem={({ item }) =>
-//
-//  <Text>
-//     {item.fdcId}
-// </Text>}
-// />
-//
-// <IconButton
-//         style={styles.circularButton}
-//         color={Colors.white}
-//         icon={require('../../assets/plus.png')}
-//         size={60}
-//         onPress={() => this.handleAdd()}>
-// </IconButton>
