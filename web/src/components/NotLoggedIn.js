@@ -73,7 +73,12 @@ export default class NotLoggedIn extends React.Component {
         on_handle_auth_uid={this.handle_auth_uid}
         on_handle_user_type={this.handle_user_type} />);
     } else if(this.state.current_page === 'signup') {
-      return (<SignUpScreen on_handle_current_page={this.handle_current_page} />);
+      return (<SignUpScreen
+        on_handle_current_page={this.handle_current_page}
+        on_handle_logged_in={this.handle_logged_in}
+        on_handle_user_uid={this.handle_user_uid}
+        on_handle_auth_uid={this.handle_auth_uid}
+        on_handle_user_type={this.handle_user_type} />);
     } else { // default
       this.setState({ current_page: 'login' }); // update for future
       return (<LoginScreen
