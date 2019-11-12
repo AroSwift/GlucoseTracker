@@ -10,15 +10,6 @@ const styles = StyleSheet.create({
     marginBottom: 14,
   },
 
-  listArea: {
-      padding: 5,
-      positon: 'relative',
-      bottom: '50%',
-      flex: 2,
-      },
-
-
-
   list: {
       margin: 5,
       backgroundColor: 'white',
