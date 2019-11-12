@@ -83,7 +83,7 @@ export default class PatientListScreen extends React.Component {
           <DataTable.Row key={index}>
             <DataTable.Cell>{item.first_name}</DataTable.Cell>
             <DataTable.Cell>{item.last_name}</DataTable.Cell>
-            <DataTable.Cell>{item.auth_uid}</DataTable.Cell>
+            <DataTable.Cell>{item.auth_id}</DataTable.Cell>
           </DataTable.Row>
         );
       });

@@ -18,6 +18,7 @@ export default class SignUpScreen extends React.Component {
           password: '',
           first_name: '',
           last_name: '',
+          auth_id: null,
           errorMessage: null
     };
   }
