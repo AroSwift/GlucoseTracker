@@ -86,7 +86,9 @@ export default class SignUpScreen extends React.Component {
       catch (error) {
           console.log(error.toString())
       }
-
+      finally {
+        return this.props.navigation.replace('MainTemplate', { user_uid: user_uid });
+      }
   }
 
 
