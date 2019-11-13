@@ -1,9 +1,7 @@
 // Get all the necessary components from React
 import React, { Component } from 'react';
 import { StyleSheet, AsyncStorage } from 'react-native';
-import {
-  Button, TextInput, Text, Surface, Card, Provider as PaperProvider
-} from 'react-native-paper';
+import { Button, TextInput, Text, Surface, Card, Provider as PaperProvider } from 'react-native-paper';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 // Get all the stylesheets
@@ -22,7 +20,7 @@ export default class SignUpScreen extends React.Component {
           auth_id: null,
           errorMessage: null
         };
-    }
+      }
 
 
   async handleSignUp() {

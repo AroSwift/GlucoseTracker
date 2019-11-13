@@ -113,7 +113,7 @@ export default class AddGlucoseScreen extends Component {
                 color={Colors.white}
                 icon={require('../../assets/plus.png')}
                 size={60}
-                onPress={() => this.handleAdd()}>
+                onPress={() => this.props.route.navigation.replace('Glucose')}>
         </IconButton>
       </PaperProvider>
     );

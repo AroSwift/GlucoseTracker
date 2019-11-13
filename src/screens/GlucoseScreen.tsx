@@ -1,14 +1,13 @@
 // Get all the necessary components from React
 import React, { Component } from 'react';
-import {AsyncStorage, StyleSheet, View, Dimensions, ScrollView } from 'react-native';
-import {
-  Button, Colors, IconButton, TextInput, Text, Surface, Card, Provider as PaperProvider
-} from 'react-native-paper';
-import {
-  LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart
-} from "react-native-chart-kit";
+import { AsyncStorage, StyleSheet, View, Dimensions, ScrollView } from 'react-native';
+import { Button, Colors, IconButton, TextInput, Text, Surface, Card, Provider as PaperProvider } from 'react-native-paper';
+import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
 // Get all the stylesheets
 import { styles } from '../stylesheets/Main';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
+import { withNavigation } from 'react-navigation';
 
 //import db from 'firebase';
 import { firebase } from '../config';
@@ -43,6 +42,7 @@ export default class GlucoseScreen extends Component {
       LunchAVGGlucose: 0.0,
       DinnerAVGGlucose: 0.0,
     };
+
   }
 
   componentDidMount() {
@@ -109,12 +109,12 @@ export default class GlucoseScreen extends Component {
               </Text>
               <ProgressChart
                 data={meal_chart_data}
-                width={Dimensions.get('window').width - 16}
+                width={Dimensions.get('window').width}
                 height={220}
                 chartConfig={{
                   backgroundColor: '#e26a00',
-                  backgroundGradientFrom: '#0b8583',
-                  backgroundGradientTo: '#efefef',
+                  backgroundGradientFrom: '#b1f9f8',
+                  backgroundGradientTo: '#b1f9f8',
                   decimalPlaces: 2,
                   color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                   style: {
@@ -126,6 +126,45 @@ export default class GlucoseScreen extends Component {
                   borderRadius: 16,
                 }}
               />
+              {/*Example of Contribution Chart*/}
+              <Text
+                style={{
+                  textAlign: 'center',
+                  fontSize: 18,
+                  padding: 16,
+                  marginTop: 16,
+                }}>
+                Glucose Contribution Graph
+              </Text>
+              <ContributionGraph
+                values={[
+                  { date: '2019-01-02', count: 1 },
+                  { date: '2019-01-03', count: 2 },
+                  { date: '2019-01-04', count: 3 },
+                  { date: '2019-01-05', count: 4 },
+                  { date: '2019-01-06', count: 5 },
+                  { date: '2019-01-30', count: 2 },
+                  { date: '2019-01-31', count: 3 },
+                  { date: '2019-03-01', count: 2 },
+                  { date: '2019-04-02', count: 4 },
+                  { date: '2019-03-05', count: 2 },
+                  { date: '2019-02-30', count: 4 },
+                ]}
+                endDate={new Date('2019-04-01')}
+                numDays={105}
+                width={Dimensions.get('window').width - 16}
+                height={220}
+                chartConfig={{
+                  backgroundColor: '#1cc910',
+                  backgroundGradientFrom: '#b1f9f8',
+                  backgroundGradientTo: '#b1f9f8',
+                  decimalPlaces: 2,
+                  color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+                  style: {
+                    borderRadius: 16,
+                  },
+                }}
+              />
                 {/*Example of Bar Chart*/}
                 <Text
                   style={{
@@ -134,7 +173,7 @@ export default class GlucoseScreen extends Component {
                     padding: 16,
                     marginTop: 16,
                   }}>
-                  Bar Chart
+                  Glucose Levels Bar Chart
                 </Text>
                 <BarChart
                   data={{
@@ -152,13 +191,13 @@ export default class GlucoseScreen extends Component {
                       },
                     ],
                   }}
-                  width={Dimensions.get('window').width - 16}
+                  width={Dimensions.get('window').width}
                   height={220}
                   yAxisLabel={'$'}
                   chartConfig={{
                     backgroundColor: '#1cc910',
-                    backgroundGradientFrom: '#eff3ff',
-                    backgroundGradientTo: '#efefef',
+                    backgroundGradientFrom: '#b1f9f8',
+                    backgroundGradientTo: '#b1f9f8',
                     decimalPlaces: 2,
                     color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
                     style: {
@@ -178,7 +217,7 @@ export default class GlucoseScreen extends Component {
               color={Colors.white}
               icon={require('../../assets/plus.png')}
               size={60}
-              onPress={() => this.handleAdd()}>
+              onPress={() => this.props.route.navigation.replace('AddGlucose')}>
       </IconButton>
       </PaperProvider>
     );
