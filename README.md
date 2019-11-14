@@ -127,3 +127,23 @@ Doctor login
 ### Admin can change who a patient’s doctor is
     - Potentially, doctor and patient could transfer
     - Verification process - a flag, only admin can accept them
+
+### How to run
+		- Pre-Conditions: Must have node.js install and have the expo app on your phone
+		- https://facebook.github.io/react-native/docs/getting-started.html
+		- https://nodejs.org/en/download/
+
+		- Mobile
+		- 1) Download the glucose tracker zip file and extract it
+		- 2) In file explorer inside of the GlucoseTracker file and type cmd in the top bar
+		- 3) Install react by running the command “npm install react-native"
+		- 4) Once installed run the command “npm start”
+		- 5) After a short while, there should be a QR code. Scan the code with the expo app for Android or with the camera app for iPhone
+		- 6) Allow the application to build and it will start automatically
+
+		- Web
+		- 1) Download the glucose tracker zip file and extract it
+		- 2) In file explorer inside of the GlucoseTracker\web and type cmd in the top bar
+		- 3) Install react by running the command “npm install react-native"
+		- 4) Once installed run the command “npm start”
+		- 5) The application will build and then open up in your web browser
