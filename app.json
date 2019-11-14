@@ -13,8 +13,7 @@
       "bundleIdentifier": "com.codebashers.glucosetracker"
     },
     "android": {
-      "package": "com.codebashers.glucosetracker",
-      "supportsTablet": true
+      "package": "com.codebashers.glucosetracker"
     },
     "version": "1.0.0",
     "orientation": "portrait",
