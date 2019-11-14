@@ -104,7 +104,7 @@ export default class AddGlucoseScreen extends Component {
             error={this.state.error}
           />
           <Button mode="contained"
-            onPress={() => this.handleAdd()}>
+            onPress={() => this.props.navigation.pop()}>
             Submit
           </Button>
         </Surface>
