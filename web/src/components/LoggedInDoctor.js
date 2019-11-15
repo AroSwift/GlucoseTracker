@@ -7,6 +7,7 @@ import {
 import '../stylesheets/Main.css';
 
 import PatientListScreen from '../screens/PatientListScreen.js';
+import PatientDataScreen from '../screens/PatientDataScreen.js';
 import PatientAddScreen from '../screens/PatientAddScreen.js';
 import SettingsScreen from '../screens/SettingsScreen.js';
 
@@ -20,6 +21,7 @@ export default class LoggedInDoctor extends React.Component {
       user_uid: null,
       auth_uid: null,
       user_type: null,
+      patient_auth_id: '',
     };
   }
 
@@ -32,6 +34,10 @@ export default class LoggedInDoctor extends React.Component {
     console.log(page);
     this.setState({current_page: page});
     this.page_content();
+  }
+
+  handle_patient_auth_id = (auth_id) => {
+    this.setState({current_auth_id: auth_id});
   }
 
   header(props) {
@@ -62,16 +68,22 @@ export default class LoggedInDoctor extends React.Component {
 
   page_content(props) {
     if(this.state.current_page === 'patient_list') {
-      return (<PatientListScreen on_handle_current_page={this.handle_current_page} />);
+      return (<PatientListScreen
+        on_handle_current_page={this.handle_current_page}
+        on_handle_patient_auth_id={this.handle_patient_auth_id} />);
     } else if(this.state.current_page === 'patient_add') {
         return (<PatientAddScreen on_handle_current_page={this.handle_current_page} />);
+    } else if(this.state.current_patient_auth_id != '' && this.state.current_page === 'patient_data') {
+      return (<PatientDataScreen on_handle_current_page={this.handle_current_page} />);
     } else if(this.state.current_page === 'settings') {
       return (<SettingsScreen
         on_handle_logged_in={this.handle_logged_in}
         on_handle_current_page={this.handle_current_page} />);
     } else {
       this.setState({ current_page: 'patient_list' });
-      return (<PatientListScreen on_handle_logged_in={this.handle_logged_in} />);
+      return (<PatientListScreen
+        on_handle_current_page={this.handle_current_page}
+        on_handle_patient_auth_id={this.handle_patient_auth_id} />);
     }
   }
 

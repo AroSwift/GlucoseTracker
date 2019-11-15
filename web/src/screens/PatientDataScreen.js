@@ -8,7 +8,7 @@ import { DataTable } from 'react-native-paper';
 import '../stylesheets/Main.css';
 import { firebase } from '../config.js';
 
-export default class PatientListScreen extends React.Component {
+export default class PaatientDataScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -72,8 +72,7 @@ export default class PatientListScreen extends React.Component {
   }
 
   goToIndividualPatient(auth_id) {
-    this.props.on_handle_patient_auth_id(auth_id);
-    this.props.on_handle_current_page('patient_data');
+    this.props.current_page('');
   }
 
   render_table() {
@@ -105,20 +104,6 @@ export default class PatientListScreen extends React.Component {
   render() {
     return (
       <PaperProvider>
-        <Surface className="patientListContainer">
-          <Text className="patientListHeader">Patients List</Text>
-
-          <DataTable>
-            <DataTable.Header>
-              <DataTable.Title>First Name</DataTable.Title>
-              <DataTable.Title>Last Name</DataTable.Title>
-              <DataTable.Title>Patient Actions</DataTable.Title>
-            </DataTable.Header>
-
-            {this.render_table()}
-
-          </DataTable>
-        </Surface>
       </PaperProvider>
     );
   }
