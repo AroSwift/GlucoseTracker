@@ -122,6 +122,7 @@ export default class LoginScreen extends React.Component {
           />
           <div className="breakAfter"></div>
           <TextInput
+            secureTextEntry
             label='Password'
             autoCapitalize="none"
             value={this.state.password}

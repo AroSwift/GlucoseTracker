@@ -112,6 +112,7 @@ export default class LoginScreen extends Component {
             error={this.state.error}
           />
           <TextInput
+            secureTextEntry
             label='Password'
             autoCapitalize="none"
             value={this.state.password}
