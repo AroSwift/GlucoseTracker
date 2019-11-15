@@ -42,7 +42,7 @@ export default class LoggedInAdmin extends React.Component {
       <PaperProvider>
         <Appbar.Header>
           <Appbar.Content
-            title="Glucose Tracker"
+            title="Glucose Tracker: Admin"
           />
           <Button mode="text" onPress={() => this.setState({ current_page: 'patient_list'})} color="white">
             <FaRegAddressCard className="icon"/>

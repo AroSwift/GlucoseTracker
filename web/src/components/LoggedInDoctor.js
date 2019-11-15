@@ -39,7 +39,7 @@ export default class LoggedInDoctor extends React.Component {
       <PaperProvider>
         <Appbar.Header>
           <Appbar.Content
-            title="Glucose Tracker"
+            title="Glucose Tracker: Doctor"
           />
           <Button mode="text" onPress={() => this.setState({ current_page: 'patients'})} color="white">
             <FaRegAddressCard className="icon"/>
