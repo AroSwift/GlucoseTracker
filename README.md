@@ -147,3 +147,6 @@ Doctor login
 		- 3) Install react by running the command “npm install react-native"
 		- 4) Once installed run the command “npm start”
 		- 5) The application will build and then open up in your web browser
+
+### Link to screen shots
+		- https://github.com/AroSwift/GlucoseTracker/blob/master/ScreenShots.zip
