@@ -40,13 +40,23 @@ Patients submit their food intake, blood glucose level and exercise information 
 		   4) Once installed run the command “npm start”
 		   5) The application will build and then open up in your web browser
 
-### Mobile ScreenShots
+## Mobile ScreenShots
 Patient Login             |  Patient SignUp							|  Patient Settings Page
 :-------------------------:|:-------------------------:|:-------------------------:
-![](screenshots/mobile/PatientLogin.jpg)  |  ![](screenshots/mobile/PatientSignUp.jpg) ![](screenshots/mobile/PatientSettings.jpg)
+![](screenshots/mobile/PatientLogin.jpg)  |  ![](screenshots/mobile/PatientSignUp.jpg) | ![](screenshots/mobile/PatientSettings.jpg)
 
+## Web ScreenShots: Admin View
+![doctor list](screenshots/web/doctorsList.png)
 
-### Web ScreenShots
-![web login](screenshots/web/WebLogin.PNG)
+![all patients](screenshots/web/allPatients.png)
+
+## Web ScreenShots: Doctor View
+![web login](screenshots/web/login.PNG)
 
 ![web signup](screenshots/web/WebSignUp.PNG)
+
+![settings](screenshots/web/settingsPage.png)
+
+![patient list](screenshots/web/patientList.png)
+
+![patient data](screenshots/web/patientData.png)
