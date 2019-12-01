@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {
-  Text, Button, Surface, Provider as PaperProvider
+  Button, Provider as PaperProvider
 } from 'react-native-paper';
 import { AsyncStorage } from 'react-native';
 import { DataTable } from 'react-native-paper';
@@ -18,6 +18,8 @@ export default class PaatientDataScreen extends React.Component {
       patients_data: [],
       values: [],
     };
+
+    console.log(this.props.patient_auth_id);
   }
 
   componentDidMount() {

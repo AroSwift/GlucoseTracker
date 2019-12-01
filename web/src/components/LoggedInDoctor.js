@@ -73,8 +73,10 @@ export default class LoggedInDoctor extends React.Component {
         on_handle_patient_auth_id={this.handle_patient_auth_id} />);
     } else if(this.state.current_page === 'patient_add') {
         return (<PatientAddScreen on_handle_current_page={this.handle_current_page} />);
-    } else if(this.state.current_patient_auth_id != '' && this.state.current_page === 'patient_data') {
-      return (<PatientDataScreen on_handle_current_page={this.handle_current_page} />);
+    } else if(this.state.current_patient_auth_id !== '' && this.state.current_page === 'patient_data') {
+      return (<PatientDataScreen
+        on_handle_current_page={this.handle_current_page}
+        patient_auth_id={this.state.current_auth_id} />);
     } else if(this.state.current_page === 'settings') {
       return (<SettingsScreen
         on_handle_logged_in={this.handle_logged_in}

@@ -123,11 +123,3 @@ export default class PatientListScreen extends React.Component {
     );
   }
 }
-
-// If we want to implement pagination later:
-// <DataTable.Pagination
-//   page={1}
-//   numberOfPages={3}
-//   onPageChange={(page) => { console.log(page); }}
-//   label="1-2 of 6"
-// />
