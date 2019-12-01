@@ -41,12 +41,12 @@ Patients submit their food intake, blood glucose level and exercise information 
 		   5) The application will build and then open up in your web browser
 
 ### Mobile ScreenShots
-	![mobile login](screenshots/mobile/PatientLogin.jpg)
+![mobile login](screenshots/mobile/PatientLogin.jpg)
 
-	![mobile signup](screenshots/mobile/PatientSignUp.jpg.jpg)
+![mobile signup](screenshots/mobile/PatientSignUp.jpg.jpg)
 
 
 ### Web ScreenShots
-	![web login](screenshots/web/WebLogin.PNG)
+![web login](screenshots/web/WebLogin.PNG)
 
-	![web signup](screenshots/web/WebSignUp.PNG)
+![web signup](screenshots/web/WebSignUp.PNG)
