@@ -79,3 +79,9 @@
   right: 0;
   background-color: 'rgba(52, 52, 52, 0)';
 }
+
+/* --- Graph Specific --- */
+
+.aboveChart {
+  margin-top: 40px;
+}

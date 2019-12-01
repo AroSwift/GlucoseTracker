@@ -1,120 +1,81 @@
 import * as React from 'react';
 import {
-  Button, Provider as PaperProvider
+  Provider as PaperProvider
 } from 'react-native-paper';
-import { AsyncStorage } from 'react-native';
-import { DataTable } from 'react-native-paper';
-
+import { TimeSeries, TimeRange, Index } from "pondjs";
+import { Charts, ChartContainer, ChartRow, YAxis, BarChart } from "react-timeseries-charts";
 import '../stylesheets/Main.css';
-import { firebase } from '../config.js';
 
 export default class PaatientDataScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      patients_uids: [],
-      patients_data: [],
-      values: [],
-    };
-
     console.log(this.props.patient_auth_id);
   }
 
-  componentDidMount() {
-    this.set_patient_data().then(result =>
-      this.setState({ patients_data: result })
-    )
-  }
-
-  async set_patient_data() {
-    try {
-      let doc_user_uid = await AsyncStorage.getItem('@GlucoseTracker:user_uid');
-
-      if(this.props.show_all === true) {
-
-        await firebase.firestore().collection('users').get()
-          .then(snapshot => {
-            var user_ids = []
-            snapshot.forEach(doc => {
-              user_ids.push(doc.data());
-            });
-
-            this.setState({ values: user_ids });
-          });
-
-          return Promise.all(this.state.values);
-      } else { // When we should only show some of the users
-        let user_docs = firebase.firestore().collection('user_doctors');
-        await user_docs.where('doctor_id', '==', doc_user_uid).get()
-          .then(snapshot => {
-            var user_ids = []
-            snapshot.forEach(doc => {
-              user_ids.push(doc.data().user_id);
-            });
-
-            // When the doctor has patients
-            if(user_ids.length > 0) {
-              this.setState({ patients_uids: user_ids });
-            }
-          });
-
-          let values = await this.state.patients_uids.map(item => {
-            return firebase.firestore().collection('users').doc(item).get().then(doc => {
-              // console.log(doc.data());
-              return doc.data();
-            });
-          });
-          return Promise.all(values);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  goToIndividualPatient(auth_id) {
-    this.props.current_page('');
-  }
-
-  render_table() {
-    try {
-
-      console.log('RENDER_TABLE ', this.state.patients_data);
-
-      return this.state.patients_data.map((item, index) => {
-        console.log(item);
-
-        return (
-          <DataTable.Row key={index}>
-            <DataTable.Cell>{item.first_name}</DataTable.Cell>
-            <DataTable.Cell>{item.last_name}</DataTable.Cell>
-            <DataTable.Cell>
-              <Button mode="contained"
-                onPress={() => this.goToIndividualPatient(item.auth_id)}>
-                View Patient Data
-              </Button>
-            </DataTable.Cell>
-          </DataTable.Row>
-        );
-      });
-    } catch (err) {
-      return null;
-    }
-  }
 
   render() {
+    const data = [
+        ["2017-01-24T00:00", 0.01],
+        ["2017-01-24T01:00", 0.13],
+        ["2017-01-24T02:00", 0.07],
+        ["2017-01-24T03:00", 0.04],
+        ["2017-01-24T04:00", 0.33],
+        ["2017-01-24T05:00", 0.2],
+        ["2017-01-24T06:00", 0.08],
+        ["2017-01-24T07:00", 0.54],
+        ["2017-01-24T08:00", 0.95],
+        ["2017-01-24T09:00", 1.12],
+        ["2017-01-24T10:00", 0.66],
+        ["2017-01-24T11:00", 0.06],
+        ["2017-01-24T12:00", 0.3],
+        ["2017-01-24T13:00", 0.05],
+        ["2017-01-24T14:00", 0.5],
+        ["2017-01-24T15:00", 0.24],
+        ["2017-01-24T16:00", 0.02],
+        ["2017-01-24T17:00", 0.98],
+        ["2017-01-24T18:00", 0.46],
+        ["2017-01-24T19:00", 0.8],
+        ["2017-01-24T20:00", 0.39],
+        ["2017-01-24T21:00", 0.4],
+        ["2017-01-24T22:00", 0.39],
+        ["2017-01-24T23:00", 0.28]
+    ];
+
+    const series = new TimeSeries({
+      name: "hilo_rainfall",
+      columns: ["index", "precip"],
+      points: data.map(([d, value]) => [
+          Index.getIndexString("1h", new Date(d)),
+          value
+      ])
+  });
+
     return (
       <PaperProvider>
+        <div className="aboveChart" />
+        <ChartContainer timeRange={series.range()} >
+          <ChartRow height="150">
+            <YAxis
+              id="rain"
+              label="Rainfall (inches/hr)"
+              min={0}
+              max={1.5}
+              format=".2f"
+              width="70"
+              type="linear"
+            />
+            <Charts>
+              <BarChart
+                axis="rain"
+                spacing={1}
+                columns={["precip"]}
+                series={series}
+              />
+            </Charts>
+          </ChartRow>
+        </ChartContainer>
       </PaperProvider>
     );
   }
 }
-
-// If we want to implement pagination later:
-// <DataTable.Pagination
-//   page={1}
-//   numberOfPages={3}
-//   onPageChange={(page) => { console.log(page); }}
-//   label="1-2 of 6"
-// />

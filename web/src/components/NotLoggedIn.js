@@ -48,6 +48,7 @@ export default class NotLoggedIn extends React.Component {
       <PaperProvider>
         <Appbar.Header>
           <Appbar.Content
+            color="white"
             title="Glucose Tracker"
           />
           <Button mode="text" onPress={() => this.setState({ current_page: 'login'})} color="white">
