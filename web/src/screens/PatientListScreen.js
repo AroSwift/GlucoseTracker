@@ -16,6 +16,7 @@ export default class PatientListScreen extends React.Component {
     this.state = {
       patients_uids: [],
       patients_data: [],
+      user_id_indexes: [],
       values: [],
     };
   }
@@ -58,12 +59,17 @@ export default class PatientListScreen extends React.Component {
             }
           });
 
+          let user_id_indexes = [];
+
           let values = await this.state.patients_uids.map(item => {
             return firebase.firestore().collection('users').doc(item).get().then(doc => {
-              // console.log(doc.data());
+              user_id_indexes.push(doc.id);
               return doc.data();
             });
           });
+
+          this.setState({ user_id_indexes: user_id_indexes });
+
           return Promise.all(values);
       }
     } catch (error) {
@@ -90,7 +96,7 @@ export default class PatientListScreen extends React.Component {
             <DataTable.Cell>{item.last_name}</DataTable.Cell>
             <DataTable.Cell>
               <Button mode="contained"
-                onPress={() => this.goToIndividualPatient(item.auth_id)}>
+                onPress={() => this.goToIndividualPatient(this.state.user_id_indexes[index])}>
                 View Patient Data
               </Button>
             </DataTable.Cell>

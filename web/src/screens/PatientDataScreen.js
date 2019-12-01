@@ -31,7 +31,23 @@ export default class PaatientDataScreen extends React.Component {
         var meals = []
         snapshot.forEach(doc => {
           let d = doc.data();
-          let date = d['year'].toString() + "-" + d['month'].toString() + "-" + d['day'] + "T00:00";
+          let year = d['year'].toString();
+          let month = d['month'].toString();
+          let day = d['day'].toString();
+
+          if(year.length === 1) {
+            year = "0" + year;
+          }
+
+          if(month.length === 1) {
+            month = "0" + month;
+          }
+
+          if(day.length === 1) {
+            day = "0" + day;
+          }
+
+          let date = year + "-" + month + "-" + day + "T00:00";
           let calories = d['calories'].replace('kJ','');
           calories = d['calories'].replace('kcal','');
           calories = parseInt(calories);
