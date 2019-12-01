@@ -1,50 +1,67 @@
 import * as React from 'react';
 import {
-  Provider as PaperProvider
+  Text, Surface, Provider as PaperProvider
 } from 'react-native-paper';
-import { TimeSeries, TimeRange, Index } from "pondjs";
-import { Charts, ChartContainer, ChartRow, YAxis, BarChart } from "react-timeseries-charts";
+import { TimeSeries, Index } from "pondjs";
+import { Charts, ChartContainer, ChartRow, YAxis, LineChart } from "react-timeseries-charts";
 import '../stylesheets/Main.css';
+import { firebase } from '../config.js';
 
 export default class PaatientDataScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      patients_data: [],
+      data: [["2019-01-24T00:00", 0.00]], // Default
+    };
+
     console.log(this.props.patient_auth_id);
   }
 
+  componentDidMount() {
+    this.set_patient_data();
+  }
+
+  async set_patient_data() {
+    await firebase.firestore().collection('meal')
+      .where('user_id', '==', this.props.patient_auth_id).get()
+      .then(snapshot => {
+        var meals = []
+        snapshot.forEach(doc => {
+          let d = doc.data();
+          let date = d['year'].toString() + "-" + d['month'].toString() + "-" + d['day'] + "T00:00";
+          let calories = d['calories'].replace('kJ','');
+          calories = d['calories'].replace('kcal','');
+          calories = parseInt(calories);
+
+          meals.push([date, calories]);
+        });
+
+        console.log(meals);
+
+        meals = meals.sort(function(a, b) {
+          if (a[0] === b[0]) {
+            return 0;
+          } else {
+            return (a[0] < b[0]) ? -1 : 1;
+          }
+        });
+
+        console.log(meals);
+
+        this.setState({ data: meals });
+      });
+  }
 
   render() {
-    const data = [
-        ["2017-01-24T00:00", 0.01],
-        ["2017-01-24T01:00", 0.13],
-        ["2017-01-24T02:00", 0.07],
-        ["2017-01-24T03:00", 0.04],
-        ["2017-01-24T04:00", 0.33],
-        ["2017-01-24T05:00", 0.2],
-        ["2017-01-24T06:00", 0.08],
-        ["2017-01-24T07:00", 0.54],
-        ["2017-01-24T08:00", 0.95],
-        ["2017-01-24T09:00", 1.12],
-        ["2017-01-24T10:00", 0.66],
-        ["2017-01-24T11:00", 0.06],
-        ["2017-01-24T12:00", 0.3],
-        ["2017-01-24T13:00", 0.05],
-        ["2017-01-24T14:00", 0.5],
-        ["2017-01-24T15:00", 0.24],
-        ["2017-01-24T16:00", 0.02],
-        ["2017-01-24T17:00", 0.98],
-        ["2017-01-24T18:00", 0.46],
-        ["2017-01-24T19:00", 0.8],
-        ["2017-01-24T20:00", 0.39],
-        ["2017-01-24T21:00", 0.4],
-        ["2017-01-24T22:00", 0.39],
-        ["2017-01-24T23:00", 0.28]
-    ];
+
+    const data = this.state.data;
 
     const series = new TimeSeries({
-      name: "hilo_rainfall",
-      columns: ["index", "precip"],
+      name: "calories",
+      columns: ["index", "calories"],
       points: data.map(([d, value]) => [
           Index.getIndexString("1h", new Date(d)),
           value
@@ -53,28 +70,29 @@ export default class PaatientDataScreen extends React.Component {
 
     return (
       <PaperProvider>
-        <div className="aboveChart" />
-        <ChartContainer timeRange={series.range()} >
-          <ChartRow height="150">
-            <YAxis
-              id="rain"
-              label="Rainfall (inches/hr)"
-              min={0}
-              max={1.5}
-              format=".2f"
-              width="70"
-              type="linear"
-            />
-            <Charts>
-              <BarChart
-                axis="rain"
-                spacing={1}
-                columns={["precip"]}
-                series={series}
+        <Surface className="patientListContainer">
+          <Text className="patientListHeader">Patient Data</Text>
+          <ChartContainer timeRange={series.range()} >
+            <ChartRow height="200">
+              <YAxis
+                id="nutrition"
+                label="Calories (grams)"
+                min={0}
+                max={1000}
+                width="60"
+                type="linear"
               />
-            </Charts>
-          </ChartRow>
-        </ChartContainer>
+              <Charts>
+                <LineChart
+                  axis="nutrition"
+                  spacing={1}
+                  columns={["calories"]}
+                  series={series}
+                />
+              </Charts>
+            </ChartRow>
+          </ChartContainer>
+        </Surface>
       </PaperProvider>
     );
   }
