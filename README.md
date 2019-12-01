@@ -45,9 +45,9 @@ Patient Login             |  Patient SignUp							|  Patient Settings Page
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](screenshots/mobile/PatientLogin.jpg)  |  ![](screenshots/mobile/PatientSignUp.jpg) | ![](screenshots/mobile/PatientSettings.jpg)
 
-Glucose List             | Add Glucose							|  Add Nutrition
-:-------------------------:|:-------------------------:|:-------------------------:
-![](screenshots/mobile/glucoseList.png)  |  ![](screenshots/mobile/addGlucose.png) | ![](screenshots/mobile/addNutrition.png)
+Glucose List             | Add Glucose							|  Add Nutrition | Add Exercise
+:-------------------------:|:-------------------------:|:-------------------------: |:-------------------------:
+![](screenshots/mobile/glucoseList.png)  |  ![](screenshots/mobile/addGlucose.png) | ![](screenshots/mobile/nutrition.png) | ![](screenshots/mobile/exercise.png)
 
 ## Web ScreenShots: Admin View
 ![doctor list](screenshots/web/doctorsList.png)
