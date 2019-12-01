@@ -182,7 +182,7 @@ render(){
 return(
 
   <PaperProvider>
-    <Surface style={styles.container}>
+    <Surface style={styles.contentContainer}>
 
       <Text style={styles.generalHeader}>Add Food</Text>
       { this.state.errorMessage != null &&
@@ -210,7 +210,7 @@ return(
          Search
       </Button>
 
-</Surface>
+
 
       <ScrollView>
         <View style={styles.container}>
@@ -240,7 +240,7 @@ return(
           </View>
         </View>
       </ScrollView>
-
+    </Surface>
 </PaperProvider>
 );
 }

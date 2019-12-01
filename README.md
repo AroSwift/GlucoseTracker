@@ -45,13 +45,17 @@ Patient Login             |  Patient SignUp							|  Patient Settings Page
 :-------------------------:|:-------------------------:|:-------------------------:
 ![](screenshots/mobile/PatientLogin.jpg)  |  ![](screenshots/mobile/PatientSignUp.jpg) | ![](screenshots/mobile/PatientSettings.jpg)
 
+Glucose List             | Add Glucose							|  Add Nutrition
+:-------------------------:|:-------------------------:|:-------------------------:
+![](screenshots/mobile/glucoseList.png)  |  ![](screenshots/mobile/addGlucose.png) | ![](screenshots/mobile/addNutrition.png)
+
 ## Web ScreenShots: Admin View
 ![doctor list](screenshots/web/doctorsList.png)
 
 ![all patients](screenshots/web/allPatients.png)
 
 ## Web ScreenShots: Doctor View
-![web login](screenshots/web/login.PNG)
+![web login](screenshots/web/login.png)
 
 ![web signup](screenshots/web/WebSignUp.PNG)
 
