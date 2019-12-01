@@ -1,8 +1,12 @@
 # Project Glucose Tracker
 **Team Name:** Code Bashers
+
 **Project Owner:** Kawsar Project
+
 **Team Members:** Aaron Barlow, David Beverley, Grant Watson, Josiah Smythe, Justin Cathelyn, and Thomas Burtner
+
 **Scrum Master:** David Beverley
+
 **Product Owners:** Aaron Barlow & Josiah Smythe
 
 ## Brief Description
@@ -11,7 +15,9 @@ Patients submit their food intake, blood glucose level and exercise information 
 
 ## Languages, Frameworks, and Libraries
 **Languages:** JavaScript & CSS
+
 **Frameworks:** React & React Native
+
 **Libraries:** React Native Paper, Firebase, DataTable, React Timeseries Charts, React Native Chart Kit, React Icons, and Pond.js
 
 ## Running Mobile and Web App
@@ -34,5 +40,13 @@ Patients submit their food intake, blood glucose level and exercise information 
 		   4) Once installed run the command “npm start”
 		   5) The application will build and then open up in your web browser
 
-### Link to screen shots
-		- https://github.com/AroSwift/GlucoseTracker/blob/master/ScreenShots.zip
+### Mobile ScreenShots
+	![mobile login](screenshots/mobile/PatientLogin.jpg)
+
+	![mobile signup](screenshots/mobile/PatientSignUp.jpg.jpg)
+
+
+### Web ScreenShots
+	![web login](screenshots/web/WebLogin.PNG)
+
+	![web signup](screenshots/web/WebSignUp.PNG)
