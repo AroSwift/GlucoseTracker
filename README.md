@@ -40,6 +40,13 @@ Patients submit their food intake, blood glucose level and exercise information 
 		   4) Once installed run the command “npm start”
 		   5) The application will build and then open up in your web browser
 
+## Publishing the Application
+**Web:** (1) Follow the `Running Mobile and Web App` guideline, (2) Host on a Linux server, and (3) run `npm start` in the `web` directory
+
+**Android:** `expo build:android`
+
+**IOS:** `expo build:ios`
+
 ## Mobile ScreenShots
 Patient Login             |  Patient SignUp							|  Patient Settings Page
 :-------------------------:|:-------------------------:|:-------------------------:
