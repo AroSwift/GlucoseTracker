@@ -1,3 +1,5 @@
+
+
 # Project Glucose Tracker
 **Team Name:** Code Bashers
 
@@ -28,7 +30,7 @@ Patients submit their food intake, blood glucose level and exercise information 
 		Mobile:
 		   1) Download the glucose tracker zip file and extract it
 		   2) In file explorer inside of the GlucoseTracker file and type cmd in the top bar
-		   3) Install react by running the command “npm install react-native"
+		   3) Install dependencies by running the command “npm install"
 		   4) Once installed run the command “npm start”
 		   5) After a short while, there should be a QR code. Scan the code with the expo app for Android or with the camera app for iPhone
 		   6) Allow the application to build and it will start automatically
@@ -36,7 +38,7 @@ Patients submit their food intake, blood glucose level and exercise information 
 		Web:
 		   1) Download the glucose tracker zip file and extract it
 		   2) In file explorer inside of the GlucoseTracker\web and type cmd in the top bar
-		   3) Install react by running the command “npm install react-native"
+		   3) Install dependencies by running the command “npm install"
 		   4) Once installed run the command “npm start”
 		   5) The application will build and then open up in your web browser
 
